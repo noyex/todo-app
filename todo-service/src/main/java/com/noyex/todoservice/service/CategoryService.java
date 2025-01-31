@@ -5,6 +5,7 @@ import com.noyex.tododata.repository.CategoryRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class CategoryService implements ICategoryService{
@@ -31,7 +32,15 @@ public class CategoryService implements ICategoryService{
     }
 
     @Override
-    public Category updateCategory(Category category) {
-        return null;
+    public Category updateCategory(Category category, Long categoryId) {
+        Optional<Category> optionalCategory =  categoryRepository.findById(categoryId);
+        if(optionalCategory.isPresent()){
+            Category categoryToUpdate = optionalCategory.get();
+            categoryToUpdate.setName(category.getName());
+            categoryToUpdate.setColor(category.getColor());
+            return categoryRepository.save(categoryToUpdate);
+        } else {
+            throw new RuntimeException("Category not found");
+        }
     }
 }

@@ -21,4 +21,31 @@ public class Category {
     private String name;
 
     private String color;
+
+    public Category() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public @NotBlank @Size(min = 3, max = 50) String getName() {
+        return name;
+    }
+
+    public void setName(@NotBlank @Size(min = 3, max = 50) String name) {
+        this.name = name;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 }

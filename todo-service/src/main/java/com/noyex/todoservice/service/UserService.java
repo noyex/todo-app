@@ -1,12 +1,9 @@
 package com.noyex.todoservice.service;
 
-import com.noyex.tododata.DTOs.CreateUserDTO;
+import com.noyex.tododata.DTOs.user.UserDTO;
 import com.noyex.tododata.model.User;
 import com.noyex.tododata.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,12 +19,8 @@ public class UserService implements IUserService {
 
 
     @Override
-    public User saveUser(CreateUserDTO userDto) {
-        boolean existsByName = userRepository.existsByUsername(userDto.getUsername());
-        boolean existsByMail = userRepository.existsByMail(userDto.getMail());
-        if(existsByName || existsByMail) {
-            throw new IllegalArgumentException("E-mail or username already in use");
-        }
+    public User saveUser(UserDTO userDto) {
+        validateUser(userDto);
         User user = new User();
         user.setUsername(userDto.getUsername());
         user.setMail(userDto.getMail());
@@ -51,15 +44,37 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User updateUser(User user, Long userId) {
-        Optional<User> optionalUser = userRepository.findById(userId);
-        if(optionalUser.isEmpty()) {
+    public User updateUser(UserDTO userDTO, Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if(user.isEmpty()) {
             throw new IllegalArgumentException("User not found");
         }
-        User existingUser = optionalUser.get();
-        existingUser.setUsername(user.getUsername());
-        existingUser.setMail(user.getMail());
-        existingUser.setPassword(user.getPassword());
+        User existingUser = user.get();
+        validateUserUpdate(userDTO, existingUser);
+        existingUser.setUsername(userDTO.getUsername());
+        existingUser.setMail(userDTO.getMail());
+        existingUser.setPassword(userDTO.getPassword());
         return userRepository.save(existingUser);
+    }
+
+    private void validateUser(UserDTO user) {
+        boolean existsByName = userRepository.existsByUsername(user.getUsername());
+        boolean existsByMail = userRepository.existsByMail(user.getMail());
+        if(existsByName || existsByMail) {
+            throw new IllegalArgumentException("E-mail or username already in use");
+        }
+    }
+
+    private void validateUserUpdate(UserDTO userDTO, User existingUser) {
+        if(!existingUser.getUsername().equals(userDTO.getUsername())){
+            if (userRepository.existsByUsername(userDTO.getUsername())) {
+                throw new IllegalArgumentException("Username already taken");
+            }
+            if (!existingUser.getMail().equals(userDTO.getMail())) {
+                if (userRepository.existsByMail(userDTO.getMail())) {
+                    throw new IllegalArgumentException("Email already in use");
+                }
+            }
+        }
     }
 }

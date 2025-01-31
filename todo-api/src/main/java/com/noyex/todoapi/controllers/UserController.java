@@ -1,6 +1,6 @@
 package com.noyex.todoapi.controllers;
 
-import com.noyex.tododata.DTOs.CreateUserDTO;
+import com.noyex.tododata.DTOs.user.UserDTO;
 import com.noyex.tododata.model.User;
 import com.noyex.todoservice.service.IUserService;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> registerUser(CreateUserDTO user){
+    public ResponseEntity<User> registerUser(@RequestBody UserDTO user){
         var savedUser = userService.saveUser(user);
         return ResponseEntity.ok(savedUser);
     }
@@ -26,14 +26,14 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/delete/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable Long userId){
         userService.deleteUser(userId);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/update/{userId}")
-    public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable Long userId){
+    public ResponseEntity<?> updateUser(@RequestBody UserDTO user, @PathVariable Long userId){
         return ResponseEntity.ok(userService.updateUser(user, userId));
     }
 

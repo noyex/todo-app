@@ -1,12 +1,17 @@
-package com.noyex.tododata.DTOs;
+package com.noyex.tododata.DTOs.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 
-public class CreateUserDTO {
+public class UserDTO {
+    @Size(min = 3, max = 20)
     private String username;
+    @Email
     private String mail;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+
 
     public String getUsername() {
         return username;

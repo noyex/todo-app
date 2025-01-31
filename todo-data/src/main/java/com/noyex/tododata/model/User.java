@@ -92,6 +92,30 @@ public class User {
         this.id = id;
     }
 
+    public List<ToDo> getTodos() {
+        return todos;
+    }
+
+    public void setTodos(List<ToDo> todos) {
+        this.todos = todos;
+    }
+
+    public LocalDateTime getLastLoginDate() {
+        return lastLoginDate;
+    }
+
+    public void setLastLoginDate(LocalDateTime lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public @NotBlank(message = "Password is required") String getPassword() {
         return password;
     }

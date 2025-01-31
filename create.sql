@@ -1,0 +1,10 @@
+create table category (id bigint not null, name varchar(50) not null, color varchar(255), primary key (id)) engine=InnoDB;
+create table to_do (done bit not null, category_id bigint, completed_at datetime(6), created_at datetime(6) not null, due_to datetime(6), id bigint not null auto_increment, updated_at datetime(6), user_id bigint not null, title varchar(100), description varchar(500), priority enum ('HIGH','LOW','MEDIUM'), primary key (id)) engine=InnoDB;
+create table users (created_at datetime(6) not null, id bigint not null auto_increment, last_login_date datetime(6), username varchar(50) not null, mail varchar(255) not null, password varchar(255) not null, primary key (id)) engine=InnoDB;
+create index idx_todo_user on to_do (user_id);
+create index idx_todo_due_to on to_do (due_to);
+create index idx_todo_created_at on to_do (created_at);
+alter table if exists users add constraint uk_user_username unique (username);
+alter table if exists users add constraint uk_user_mail unique (mail);
+alter table if exists to_do add constraint FKhdf32h302ek7v92gs6h7hreil foreign key (category_id) references category (id);
+alter table if exists to_do add constraint FK7em4k07c8u65es8eveh4bee4x foreign key (user_id) references users (id);

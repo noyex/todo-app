@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @Table(indexes = {
         @Index(name = "idx_todo_user", columnList = "user_id"),
         @Index(name = "idx_todo_due_to", columnList = "dueTo"),
-        @Index(name = "idx_todo_status", columnList = "status"),
         @Index(name = "idx_todo_created_at", columnList = "createdAt")
 })
 public class ToDo {
@@ -27,6 +26,10 @@ public class ToDo {
 
     @Size(max = 500, message = "Description cannot exceed 500 characters")
     private String description;
+
+    @ManyToOne
+    private Category category;
+
     private boolean done;
 
     @ManyToOne
@@ -38,6 +41,7 @@ public class ToDo {
     private LocalDateTime createdAt;
     private LocalDateTime completedAt;
     private LocalDateTime updatedAt;
+    private LocalDateTime dueTo;
 
     @Enumerated(EnumType.STRING)
     private Priority priority;

@@ -17,7 +17,6 @@ import java.util.List;
                 @UniqueConstraint(columnNames = "username", name = "uk_user_username"),
                 @UniqueConstraint(columnNames = "mail", name = "uk_user_mail")
         })
-@Data
 public class User {
 
     @Id
@@ -64,5 +63,24 @@ public class User {
 
     public void updateLastLoginDate() {
         this.lastLoginDate = LocalDateTime.now();
+    }
+
+    public @NotBlank(message = "Username is required") @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters") String getUsername() {
+        return username;
+    }
+
+    public void setUsername(@NotBlank(message = "Username is required") @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters") String username) {
+        this.username = username;
+    }
+
+    public @NotBlank(message = "Email is required") @Email(message = "Email should be valid") String getMail() {
+        return mail;
+    }
+
+    public void setMail(@NotBlank(message = "Email is required") @Email(message = "Email should be valid") String mail) {
+        this.mail = mail;
+    }
+
+    public User() {
     }
 }

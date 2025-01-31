@@ -1,5 +1,6 @@
 package com.noyex.todoservice.service;
 
+import com.noyex.tododata.DTOs.CreateUserDTO;
 import com.noyex.tododata.model.User;
 import com.noyex.tododata.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +22,16 @@ public class UserService implements IUserService {
 
 
     @Override
-    public User saveUser(User user) {
-        boolean existsByName = userRepository.existsByUsername(user.getUsername());
-        boolean existsByMail = userRepository.existsByMail(user.getMail());
+    public User saveUser(CreateUserDTO userDto) {
+        boolean existsByName = userRepository.existsByUsername(userDto.getUsername());
+        boolean existsByMail = userRepository.existsByMail(userDto.getMail());
         if(existsByName || existsByMail) {
             throw new IllegalArgumentException("E-mail or username already in use");
         }
+        User user = new User();
+        user.setUsername(userDto.getUsername());
+        user.setMail(userDto.getMail());
+        user.setPassword(userDto.getPassword());
         return userRepository.save(user);
     }
 

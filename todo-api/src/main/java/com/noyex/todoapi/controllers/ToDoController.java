@@ -1,6 +1,7 @@
 package com.noyex.todoapi.controllers;
 
 
+import com.noyex.tododata.DTOs.CreateToDoDTO;
 import com.noyex.tododata.model.ToDo;
 import com.noyex.todoservice.service.IToDoService;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,9 @@ public class ToDoController {
     }
 
     @PostMapping("/add/{userId}")
-    public ResponseEntity<?> addToDoForUser(@RequestBody ToDo toDo, @PathVariable Long userId){
+    public ResponseEntity<?> addToDoForUser(@RequestBody CreateToDoDTO toDo, @PathVariable Long userId){
         return ResponseEntity.ok(toDoService.saveForUser(toDo, userId));
     }
+
 
 }

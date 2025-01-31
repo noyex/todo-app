@@ -1,5 +1,6 @@
 package com.noyex.todoapi.controllers;
 
+import com.noyex.tododata.DTOs.CreateUserDTO;
 import com.noyex.tododata.model.User;
 import com.noyex.todoservice.service.IUserService;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> registerUser(User user){
+    public ResponseEntity<User> registerUser(CreateUserDTO user){
         var savedUser = userService.saveUser(user);
         return ResponseEntity.ok(savedUser);
     }

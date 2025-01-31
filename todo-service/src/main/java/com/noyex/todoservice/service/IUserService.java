@@ -1,6 +1,6 @@
 package com.noyex.todoservice.service;
 
-import com.noyex.tododata.DTOs.user.UserDTO;
+import com.noyex.tododata.DTOs.UserDTO;
 import com.noyex.tododata.model.User;
 
 import java.util.List;

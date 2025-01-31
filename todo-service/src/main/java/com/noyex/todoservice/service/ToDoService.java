@@ -1,6 +1,6 @@
 package com.noyex.todoservice.service;
 
-import com.noyex.tododata.DTOs.CreateToDoDTO;
+import com.noyex.tododata.DTOs.ToDoDTO;
 import com.noyex.tododata.model.Category;
 import com.noyex.tododata.model.ToDo;
 import com.noyex.tododata.model.User;
@@ -39,7 +39,12 @@ public class ToDoService implements IToDoService {
     }
 
     @Override
-    public ToDo saveForUser(CreateToDoDTO toDo, Long userId) {
+    public List<ToDo> getListOfAllToDos() {
+        return toDoRepository.findAll();
+    }
+
+    @Override
+    public ToDo saveForUser(ToDoDTO toDo, Long userId) {
         Optional<User> user = userRepository.findById(userId);
         if (user.isEmpty()) {
             throw new IllegalArgumentException("User not found");
@@ -62,25 +67,24 @@ public class ToDoService implements IToDoService {
     }
 
     @Override
-    public ToDo update(ToDo toDo, Long userId, Long toDoId) {
-        Optional<User> user = userRepository.findById(userId);
-        if (user.isEmpty()) {
-            throw new IllegalArgumentException("User not found");
-        }
-        User existingUser = user.get();
+    public ToDo update(ToDoDTO toDo, Long toDoId) {
         Optional<ToDo> toDoOptional = toDoRepository.findById(toDoId);
         if (toDoOptional.isEmpty()) {
             throw new IllegalArgumentException("ToDo not found");
         }
         ToDo existingToDo = toDoOptional.get();
 
-        toDo.setUser(existingUser);
-        toDo.setCategory(existingToDo.getCategory());
-        toDo.setUpdatedAt(LocalDateTime.now());
-        toDo.setDescription(existingToDo.getDescription());
-        toDo.setDueTo(existingToDo.getDueTo());
-        toDo.setTitle(existingToDo.getTitle());
-        return toDoRepository.save(toDo);
+        existingToDo.setTitle(toDo.getTitle());
+        existingToDo.setDescription(toDo.getDescription());
+        existingToDo.setDueTo(toDo.getDueTo());
+        existingToDo.setDone(toDo.isDone());
+        existingToDo.setPriority(toDo.getPriority());
+        existingToDo.setUpdatedAt(LocalDateTime.now());
+        if(toDo.getCategoryId() != null) {
+            Category category = categoryRepository.findById(toDo.getCategoryId()).orElseThrow(() -> new IllegalArgumentException("Category not found"));
+            existingToDo.setCategory(category);
+        }
+        return toDoRepository.save(existingToDo);
     }
 
 

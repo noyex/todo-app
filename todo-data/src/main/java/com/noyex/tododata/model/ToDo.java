@@ -1,6 +1,7 @@
 package com.noyex.tododata.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -27,7 +28,8 @@ public class ToDo {
     @Size(max = 500, message = "Description cannot exceed 500 characters")
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "category_id")
     private Category category;
 
@@ -35,6 +37,7 @@ public class ToDo {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnoreProperties({"todos", "password", "lastLoginDate", "createdAt"})
     private User user;
 
     @Column(nullable = false, updatable = false)

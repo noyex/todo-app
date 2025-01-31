@@ -1,6 +1,6 @@
 package com.noyex.todoapi.controllers;
 
-import com.noyex.tododata.DTOs.user.UserDTO;
+import com.noyex.tododata.DTOs.UserDTO;
 import com.noyex.tododata.model.User;
 import com.noyex.todoservice.service.IUserService;
 import org.springframework.http.ResponseEntity;

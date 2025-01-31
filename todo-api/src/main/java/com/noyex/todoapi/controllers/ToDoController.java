@@ -1,8 +1,7 @@
 package com.noyex.todoapi.controllers;
 
 
-import com.noyex.tododata.DTOs.CreateToDoDTO;
-import com.noyex.tododata.model.ToDo;
+import com.noyex.tododata.DTOs.ToDoDTO;
 import com.noyex.todoservice.service.IToDoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,9 +21,24 @@ public class ToDoController {
         return ResponseEntity.ok(toDoService.getListOfToDosByUserId(userId));
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllToDos(){
+        return ResponseEntity.ok(toDoService.getListOfAllToDos());
+    }
+
     @PostMapping("/add/{userId}")
-    public ResponseEntity<?> addToDoForUser(@RequestBody CreateToDoDTO toDo, @PathVariable Long userId){
+    public ResponseEntity<?> addToDoForUser(@RequestBody ToDoDTO toDo, @PathVariable Long userId){
         return ResponseEntity.ok(toDoService.saveForUser(toDo, userId));
+    }
+
+    @DeleteMapping("/delete/{toDoId}")
+    public ResponseEntity<?> deleteToDoById(@PathVariable Long toDoId){
+        toDoService.delete(toDoId);
+        return ResponseEntity.ok("Deleted");
+    }
+    @PutMapping("/update/{toDoId}")
+    public ResponseEntity<?> updateToDoById(@RequestBody ToDoDTO toDo, @PathVariable Long toDoId){
+        return ResponseEntity.ok(toDoService.update(toDo, toDoId));
     }
 
 

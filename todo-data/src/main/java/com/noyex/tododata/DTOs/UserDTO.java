@@ -1,4 +1,4 @@
-package com.noyex.tododata.DTOs.user;
+package com.noyex.tododata.DTOs;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;

@@ -1,18 +1,22 @@
 package com.noyex.tododata.DTOs;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.noyex.tododata.model.Priority;
-import lombok.Data;
 
 import java.time.LocalDateTime;
 
 
-public class CreateToDoDTO {
+public class ToDoDTO {
     private String title;
     private String description;
+    @JsonProperty("category_id")
     private Long categoryId;
     private boolean done;
+    @JsonProperty("due_to")
     private LocalDateTime dueTo;
     private Priority priority;
+    @JsonProperty("updated_at")
+    private LocalDateTime updatedAt;
 
     public String getTitle() {
         return title;
@@ -60,5 +64,13 @@ public class CreateToDoDTO {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

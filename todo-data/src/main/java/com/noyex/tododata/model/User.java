@@ -1,5 +1,6 @@
 package com.noyex.tododata.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -35,6 +36,7 @@ public class User {
 
     @NotBlank(message = "Password is required")
     @Column(nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -92,13 +94,6 @@ public class User {
         this.id = id;
     }
 
-    public List<ToDo> getTodos() {
-        return todos;
-    }
-
-    public void setTodos(List<ToDo> todos) {
-        this.todos = todos;
-    }
 
     public LocalDateTime getLastLoginDate() {
         return lastLoginDate;
@@ -118,5 +113,13 @@ public class User {
 
     public @NotBlank(message = "Password is required") String getPassword() {
         return password;
+    }
+
+    public List<ToDo> getTodos() {
+        return todos;
+    }
+
+    public void setTodos(List<ToDo> todos) {
+        this.todos = todos;
     }
 }

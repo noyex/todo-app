@@ -8,4 +8,5 @@ public interface IUserService {
     User saveUser(User user);
     void deleteUser(Long userId);
     List<User> getAllUsers();
+    User updateUser(User user, Long userId);
 }

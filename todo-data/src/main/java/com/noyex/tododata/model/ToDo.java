@@ -9,7 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+
 @Table(indexes = {
         @Index(name = "idx_todo_user", columnList = "user_id"),
         @Index(name = "idx_todo_due_to", columnList = "dueTo"),
@@ -45,4 +45,23 @@ public class ToDo {
 
     @Enumerated(EnumType.STRING)
     private Priority priority;
+
+    public ToDo() {
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

@@ -3,9 +3,11 @@ package com.noyex.todoservice.service;
 
 import com.noyex.tododata.model.ToDo;
 
+import java.util.List;
+
 public interface IToDoService {
-    ToDo getByUserId(Long userId);
-    ToDo save(ToDo toDo);
+    List<ToDo> getListOfToDosByUserId(Long userId);
+    ToDo saveForUser(ToDo toDo, Long userId);
     ToDo update(ToDo toDo);
     void delete(Long toDoId);
 }

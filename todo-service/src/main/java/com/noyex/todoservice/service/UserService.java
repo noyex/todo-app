@@ -44,4 +44,17 @@ public class UserService implements IUserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
+    @Override
+    public User updateUser(User user, Long userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if(optionalUser.isEmpty()) {
+            throw new IllegalArgumentException("User not found");
+        }
+        User existingUser = optionalUser.get();
+        existingUser.setUsername(user.getUsername());
+        existingUser.setMail(user.getMail());
+        existingUser.setPassword(user.getPassword());
+        return userRepository.save(existingUser);
+    }
 }

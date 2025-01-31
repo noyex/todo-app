@@ -1,13 +1,9 @@
-package com.noyex.todoapi;
+package com.noyex.todoapi.controllers;
 
 import com.noyex.tododata.model.User;
 import com.noyex.todoservice.service.IUserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
@@ -27,5 +23,11 @@ public class UserController {
     @GetMapping("/all")
     public ResponseEntity<?> getAllUsers(){
         return ResponseEntity.ok(userService.getAllUsers());
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long userId){
+        userService.deleteUser(userId);
+        return ResponseEntity.ok().build();
     }
 }

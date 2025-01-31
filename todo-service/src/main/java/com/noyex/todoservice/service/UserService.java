@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class UserService implements IUserService {
@@ -30,8 +31,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void deleteUser(User user) {
-        userRepository.delete(user);
+    public void deleteUser(Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if(user.isEmpty()) {
+            throw new IllegalArgumentException("User not found");
+        }
+        User existingUser = user.get();
+        userRepository.delete(existingUser);
     }
 
     @Override

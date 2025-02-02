@@ -27,6 +27,7 @@ public class UserController {
         var savedUser = userService.saveUser(user);
         return ResponseEntity.ok(savedUser);
     }
+
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password){
         var userOptional = userRepository.findByUsername(username);

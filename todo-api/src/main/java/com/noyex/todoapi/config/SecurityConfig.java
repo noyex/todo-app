@@ -23,21 +23,16 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests(authorize -> authorize
-                        .antMatchers("/api/users/register").permitAll()
-                        .antMatchers("/api/users/login").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .formLogin(form -> form
+        return http
+                .formLogin(httpForm -> httpForm
                         .loginPage("/api/users/login")
                         .permitAll()
                 )
-                .logout(logout -> logout
-                        .logoutUrl("/api/users/logout")
-                        .permitAll()
-                );
-        return http.build();
+                .authorizeHttpRequests(registry -> {
+                registry.requestMatchers("/api/users/register").permitAll();
+                registry.anyRequest().authenticated();
+                })
+                .build();
     }
 
     @Bean
@@ -45,9 +40,4 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public UserDetailsService  userDetailsService(){
-        return username -> userService.loadUserByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
-    }
 }

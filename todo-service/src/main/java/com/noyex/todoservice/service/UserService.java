@@ -3,6 +3,8 @@ package com.noyex.todoservice.service;
 import com.noyex.tododata.DTOs.UserDTO;
 import com.noyex.tododata.model.User;
 import com.noyex.tododata.repository.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -55,6 +57,21 @@ public class UserService implements IUserService {
         existingUser.setMail(userDTO.getMail());
         existingUser.setPassword(userDTO.getPassword());
         return userRepository.save(existingUser);
+    }
+
+    private Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        return org.springframework.security.core.userdetails.User
+                .withUsername(username)
+                .password(user.getPassword())
+                .authorities("USER")
+                .build();
     }
 
     private void validateUser(UserDTO user) {

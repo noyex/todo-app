@@ -10,6 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -29,7 +31,13 @@ public class UserController {
 
     @GetMapping("/all")
     public ResponseEntity<?> getAllUsers(){
-        return ResponseEntity.ok(userService.getAllUsers());
+        List<User> users = userService.getAllUsers();
+        System.out.println("Znaleziono użytkowników: " + users.size());
+        return ResponseEntity.ok(users);
+    }
+    @GetMapping("/test")
+    public ResponseEntity<?> test() {
+        return ResponseEntity.ok("Test działa");
     }
 
     @DeleteMapping("/delete/{userId}")

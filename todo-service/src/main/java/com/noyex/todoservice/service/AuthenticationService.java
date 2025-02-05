@@ -3,6 +3,7 @@ package com.noyex.todoservice.service;
 import com.noyex.tododata.DTOs.LoginUserDTO;
 import com.noyex.tododata.DTOs.RegisterUserDTO;
 import com.noyex.tododata.DTOs.VerifyUserDTO;
+import com.noyex.tododata.model.Role;
 import com.noyex.tododata.model.User;
 import com.noyex.tododata.repository.UserRepository;
 import jakarta.mail.MessagingException;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
+
+import static com.noyex.tododata.model.Role.ADMIN;
 
 @Service
 public class AuthenticationService {
@@ -29,8 +32,9 @@ public class AuthenticationService {
         this.emailService = emailService;
     }
 
-    public User singUp(RegisterUserDTO input) {
+    public User singUp(RegisterUserDTO input, Role role) {
         User user = new User(input.getUsername(), input.getEmail(), passwordEncoder.encode(input.getPassword()));
+        user.setRole(role);
         user.setVerificationCode(generateVerificationCode());
         user.setVerificationExpiration(LocalDateTime.now().plusMinutes(15));
         user.setEnabled(false);
@@ -100,5 +104,9 @@ public class AuthenticationService {
         Random random = new Random();
         int code = random.nextInt(999999) + 100000;
         return String.valueOf(code);
+    }
+
+    public User createAdmin(RegisterUserDTO input){
+        return singUp(input, ADMIN);
     }
 }

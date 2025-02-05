@@ -58,6 +58,18 @@ public class User implements UserDetails {
     @Column(name = "verification_expiration")
     private LocalDateTime verificationExpiration;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", length = 20)
+    private Role role = Role.USER;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();

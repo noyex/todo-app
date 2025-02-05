@@ -4,6 +4,7 @@ import com.noyex.todoapi.responses.LoginResponse;
 import com.noyex.tododata.DTOs.LoginUserDTO;
 import com.noyex.tododata.DTOs.RegisterUserDTO;
 import com.noyex.tododata.DTOs.VerifyUserDTO;
+import com.noyex.tododata.model.Role;
 import com.noyex.tododata.model.User;
 import com.noyex.tododata.repository.UserRepository;
 import com.noyex.todoservice.service.AuthenticationService;
@@ -29,7 +30,7 @@ public class AuthenticationController {
 
     @PostMapping("/singup")
     public ResponseEntity<User> register(@RequestBody RegisterUserDTO registerUserDTO){
-        User registeredUser = authenticationService.singUp(registerUserDTO);
+        User registeredUser = authenticationService.singUp(registerUserDTO, Role.USER);
         return ResponseEntity.ok(registeredUser);
     }
 

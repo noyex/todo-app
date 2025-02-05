@@ -7,9 +7,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -18,7 +21,7 @@ import java.util.List;
                 @UniqueConstraint(columnNames = "username", name = "uk_user_username"),
                 @UniqueConstraint(columnNames = "mail", name = "uk_user_mail")
         })
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,6 +50,14 @@ public class User {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    @Column(name = "verification_code")
+    private String verificationCode;
+
+    private boolean enabled;
+
+    @Column(name = "verification_expiration")
+    private LocalDateTime verificationExpiration;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
@@ -57,6 +68,31 @@ public class User {
             throw new IllegalArgumentException("Password cannot be empty");
         }
         this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
     }
 
     public boolean checkPassword(String password) {

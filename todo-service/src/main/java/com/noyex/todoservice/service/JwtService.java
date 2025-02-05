@@ -19,7 +19,7 @@ public class JwtService {
     @Value ("${JWR_SECRET}")
     private String secretKey;
 
-    @Value("${JWT.EXPIRATION_TIME}")
+    @Value("${JWR_EXPIRATION_TIME}")
     private long expirationTime;
 
     public String extractUsername(String token) {
@@ -49,7 +49,7 @@ public class JwtService {
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
-                .signWith(getSignInKey(), SignatureAlgorithm.ES256)
+                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 

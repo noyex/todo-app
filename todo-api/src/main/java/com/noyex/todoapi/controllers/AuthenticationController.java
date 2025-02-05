@@ -5,10 +5,13 @@ import com.noyex.tododata.DTOs.LoginUserDTO;
 import com.noyex.tododata.DTOs.RegisterUserDTO;
 import com.noyex.tododata.DTOs.VerifyUserDTO;
 import com.noyex.tododata.model.User;
+import com.noyex.tododata.repository.UserRepository;
 import com.noyex.todoservice.service.AuthenticationService;
 import com.noyex.todoservice.service.JwtService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @RequestMapping("/api/auth")
 @RestController
@@ -16,10 +19,12 @@ public class AuthenticationController {
 
     private final JwtService jwtService;
     private final AuthenticationService authenticationService;
+    private final UserRepository userRepository;
 
-    public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService) {
+    public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService, UserRepository userRepository) {
         this.jwtService = jwtService;
         this.authenticationService = authenticationService;
+        this.userRepository = userRepository;
     }
 
     @PostMapping("/singup")
@@ -33,6 +38,8 @@ public class AuthenticationController {
         User authenticatedUser = authenticationService.authenticate(loginUserDTO);
         String jwtToken = jwtService.generateToken(authenticatedUser);
         LoginResponse loginResponse = new LoginResponse(jwtToken, jwtService.getExpirationTime());
+        authenticatedUser.setLastLoginDate(LocalDateTime.now());
+        userRepository.save(authenticatedUser);
         return ResponseEntity.ok(loginResponse);
     }
 

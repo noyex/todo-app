@@ -63,12 +63,20 @@ public class User implements UserDetails {
         createdAt = LocalDateTime.now();
     }
 
+
+    public User(String username, String mail, String password) {
+        this.username = username;
+        this.mail = mail;
+        this.password = password;
+    }
+
     public void setPassword(String password) {
         if (password == null || password.trim().isEmpty()) {
             throw new IllegalArgumentException("Password cannot be empty");
         }
         this.password = BCrypt.hashpw(password, BCrypt.gensalt());
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -157,5 +165,25 @@ public class User implements UserDetails {
 
     public void setTodos(List<ToDo> todos) {
         this.todos = todos;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+
+    public void setVerificationExpiration(LocalDateTime verificationExpiration) {
+        this.verificationExpiration = verificationExpiration;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public LocalDateTime getVerificationExpiration() {
+        return verificationExpiration;
     }
 }

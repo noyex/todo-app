@@ -1,6 +1,6 @@
 create table category (id bigint not null auto_increment, name varchar(50) not null, color varchar(255), primary key (id)) engine=InnoDB;
 create table to_do (done bit not null, category_id bigint, completed_at datetime(6), created_at datetime(6) not null, due_to datetime(6), id bigint not null auto_increment, updated_at datetime(6), user_id bigint not null, title varchar(100), description varchar(500), priority enum ('HIGH','LOW','MEDIUM'), primary key (id)) engine=InnoDB;
-create table users (created_at datetime(6) not null, id bigint not null auto_increment, last_login_date datetime(6), username varchar(50) not null, mail varchar(255) not null, password varchar(255) not null, primary key (id)) engine=InnoDB;
+create table users (enabled bit not null, created_at datetime(6) not null, id bigint not null auto_increment, last_login_date datetime(6), verification_expiration datetime(6), username varchar(50) not null, mail varchar(255) not null, password varchar(255) not null, verification_code varchar(255), primary key (id)) engine=InnoDB;
 create index idx_todo_user on to_do (user_id);
 create index idx_todo_due_to on to_do (due_to);
 create index idx_todo_created_at on to_do (created_at);

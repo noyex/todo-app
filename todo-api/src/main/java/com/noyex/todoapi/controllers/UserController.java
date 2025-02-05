@@ -5,6 +5,8 @@ import com.noyex.tododata.model.User;
 import com.noyex.tododata.repository.UserRepository;
 import com.noyex.todoservice.service.IUserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,29 +15,16 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final IUserService userService;
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
-    public UserController(IUserService userService, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserController(IUserService userService) {
         this.userService = userService;
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody UserDTO user){
-        var savedUser = userService.saveUser(user);
-        return ResponseEntity.ok(savedUser);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password){
-        var userOptional = userRepository.findByUsername(username);
-        if(userOptional.isPresent() && passwordEncoder.matches(password, userOptional.get().getPassword())){
-            return ResponseEntity.ok("Logged in");
-        } else {
-            return ResponseEntity.status(401).body("Invalid credentials");
-        }
+    @GetMapping("/me")
+    public ResponseEntity<User> authenticatedUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = (User) authentication.getPrincipal();
+        return ResponseEntity.ok(currentUser);
     }
 
     @GetMapping("/all")

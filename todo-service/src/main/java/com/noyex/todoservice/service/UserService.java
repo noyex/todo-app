@@ -25,7 +25,7 @@ public class UserService implements IUserService {
         validateUser(userDto);
         User user = new User();
         user.setUsername(userDto.getUsername());
-        user.setMail(userDto.getMail());
+        user.setEmail(userDto.getMail());
         user.setPassword(userDto.getPassword());
         return userRepository.save(user);
     }
@@ -54,7 +54,7 @@ public class UserService implements IUserService {
         User existingUser = user.get();
         validateUserUpdate(userDTO, existingUser);
         existingUser.setUsername(userDTO.getUsername());
-        existingUser.setMail(userDTO.getMail());
+        existingUser.setEmail(userDTO.getMail());
         existingUser.setPassword(userDTO.getPassword());
         return userRepository.save(existingUser);
     }
@@ -76,7 +76,7 @@ public class UserService implements IUserService {
 
     private void validateUser(UserDTO user) {
         boolean existsByName = userRepository.existsByUsername(user.getUsername());
-        boolean existsByMail = userRepository.existsByMail(user.getMail());
+        boolean existsByMail = userRepository.existsByEmail(user.getMail());
         if(existsByName || existsByMail) {
             throw new IllegalArgumentException("E-mail or username already in use");
         }
@@ -87,8 +87,8 @@ public class UserService implements IUserService {
             if (userRepository.existsByUsername(userDTO.getUsername())) {
                 throw new IllegalArgumentException("Username already taken");
             }
-            if (!existingUser.getMail().equals(userDTO.getMail())) {
-                if (userRepository.existsByMail(userDTO.getMail())) {
+            if (!existingUser.getEmail().equals(userDTO.getMail())) {
+                if (userRepository.existsByEmail(userDTO.getMail())) {
                     throw new IllegalArgumentException("Email already in use");
                 }
             }

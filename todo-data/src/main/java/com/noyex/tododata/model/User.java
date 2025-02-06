@@ -19,7 +19,7 @@ import java.util.List;
 @Table(name = "users",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username", name = "uk_user_username"),
-                @UniqueConstraint(columnNames = "mail", name = "uk_user_mail")
+                @UniqueConstraint(columnNames = "email", name = "uk_user_email")
         })
 public class User implements UserDetails {
 
@@ -35,7 +35,7 @@ public class User implements UserDetails {
     @NotBlank(message = "Email is required")
     @Email(message = "Email should be valid")
     @Column(nullable = false)
-    private String mail;
+    private String email;
 
     @NotBlank(message = "Password is required")
     @Column(nullable = false)
@@ -76,9 +76,9 @@ public class User implements UserDetails {
     }
 
 
-    public User(String username, String mail, String password) {
+    public User(String username, String email, String password) {
         this.username = username;
-        this.mail = mail;
+        this.email = email;
         this.password = password;
     }
 
@@ -131,12 +131,12 @@ public class User implements UserDetails {
         this.username = username;
     }
 
-    public @NotBlank(message = "Email is required") @Email(message = "Email should be valid") String getMail() {
-        return mail;
+    public @NotBlank(message = "Email is required") @Email(message = "Email should be valid") String getEmail() {
+        return email;
     }
 
-    public void setMail(@NotBlank(message = "Email is required") @Email(message = "Email should be valid") String mail) {
-        this.mail = mail;
+    public void setEmail(@NotBlank(message = "Email is required") @Email(message = "Email should be valid") String mail) {
+        this.email = mail;
     }
 
     public User() {

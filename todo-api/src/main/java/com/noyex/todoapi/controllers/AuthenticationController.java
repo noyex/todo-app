@@ -30,7 +30,7 @@ public class AuthenticationController {
 
     @PostMapping("/singup")
     public ResponseEntity<User> register(@RequestBody RegisterUserDTO registerUserDTO){
-        User registeredUser = authenticationService.singUp(registerUserDTO, Role.USER);
+        User registeredUser = authenticationService.signup(registerUserDTO);
         return ResponseEntity.ok(registeredUser);
     }
 
@@ -57,7 +57,7 @@ public class AuthenticationController {
     @PostMapping("/resend")
     public ResponseEntity<?> resendVerificationCode(@RequestParam String email){
         try{
-            authenticationService.reSendVerificationCode(email);
+            authenticationService.resendVerificationCode(email);
             return ResponseEntity.ok("Verification code sent");
         } catch (RuntimeException e){
             return ResponseEntity.badRequest().body(e.getMessage());

@@ -30,22 +30,22 @@ public class AdminPanelController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/users/add/admin")
-    public ResponseEntity<User> createAdmin(@RequestBody RegisterUserDTO input){
-        User user = authenticationService.createAdmin(input);
-        return ResponseEntity.ok(user);
-    }
+//    @PostMapping("/users/add/admin")
+//    public ResponseEntity<User> createAdmin(@RequestBody RegisterUserDTO input){
+//        User user = authenticationService.createAdmin(input);
+//        return ResponseEntity.ok(user);
+//    }
 
-    @PostMapping("/users/add")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<User> createUser(@RequestBody RegisterUserDTO registerUserDTO){
-        User registeredUser = authenticationService.singUp(registerUserDTO, Role.USER);
-        registeredUser.setEnabled(true);
-        registeredUser.setVerificationCode(null);
-        registeredUser.setVerificationExpiration(null);
-        userRepository.save(registeredUser);
-        return ResponseEntity.ok(registeredUser);
-    }
+//    @PostMapping("/users/add")
+//    @PreAuthorize("hasRole('ADMIN')")
+//    public ResponseEntity<User> createUser(@RequestBody RegisterUserDTO registerUserDTO){
+//        User registeredUser = authenticationService.singUp(registerUserDTO, Role.USER);
+//        registeredUser.setEnabled(true);
+//        registeredUser.setVerificationCode(null);
+//        registeredUser.setVerificationExpiration(null);
+//        userRepository.save(registeredUser);
+//        return ResponseEntity.ok(registeredUser);
+//    }
 
     @DeleteMapping("/users/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")

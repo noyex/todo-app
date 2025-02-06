@@ -12,4 +12,5 @@ public interface IUserService {
     List<User> getAllUsers();
     User updateUser(UserDTO userDTO, Long userId);
     UserDetails loadUserByUsername(String username);
+    User getUserById(Long userId);
 }

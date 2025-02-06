@@ -35,6 +35,11 @@ public class UserController {
         System.out.println("Znaleziono użytkowników: " + users.size());
         return ResponseEntity.ok(users);
     }
+
+    @GetMapping("/get/{userId}")
+    public ResponseEntity<?> getUserById(@PathVariable Long userId){
+        return ResponseEntity.ok(userService.getUserById(userId));
+    }
     @GetMapping("/test")
     public ResponseEntity<?> test() {
         return ResponseEntity.ok("Test działa");

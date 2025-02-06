@@ -56,6 +56,7 @@ public class UserService implements IUserService {
         existingUser.setUsername(userDTO.getUsername());
         existingUser.setEmail(userDTO.getMail());
         existingUser.setPassword(userDTO.getPassword());
+        existingUser.setRole(userDTO.getRole());
         return userRepository.save(existingUser);
     }
 
@@ -72,6 +73,12 @@ public class UserService implements IUserService {
                 .password(user.getPassword())
                 .authorities("USER")
                 .build();
+    }
+
+    @Override
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 
     private void validateUser(UserDTO user) {

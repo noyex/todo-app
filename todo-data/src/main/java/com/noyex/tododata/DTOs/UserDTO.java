@@ -1,9 +1,14 @@
 package com.noyex.tododata.DTOs;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.noyex.tododata.model.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class UserDTO {
     @Size(min = 3, max = 20)
     private String username;
@@ -12,28 +17,5 @@ public class UserDTO {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    private Role role;
 }

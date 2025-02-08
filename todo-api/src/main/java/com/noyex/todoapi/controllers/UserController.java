@@ -40,10 +40,6 @@ public class UserController {
     public ResponseEntity<?> getUserById(@PathVariable Long userId){
         return ResponseEntity.ok(userService.getUserById(userId));
     }
-    @GetMapping("/test")
-    public ResponseEntity<?> test() {
-        return ResponseEntity.ok("Test działa");
-    }
 
     @DeleteMapping("/delete/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable Long userId){
@@ -51,9 +47,9 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/update/{userId}")
-    public ResponseEntity<?> updateUser(@RequestBody UserDTO user, @PathVariable Long userId){
-        return ResponseEntity.ok(userService.updateUser(user, userId));
-    }
+//    @PutMapping("/update/{userId}")
+//    public ResponseEntity<?> updateUser(@RequestBody UserDTO user, @PathVariable Long userId){
+//        return ResponseEntity.ok(userService.updateUser(user, userId));
+//    }
 
 }

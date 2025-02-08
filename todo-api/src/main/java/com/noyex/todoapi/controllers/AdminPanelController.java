@@ -2,6 +2,7 @@ package com.noyex.todoapi.controllers;
 
 import com.noyex.tododata.DTOs.RegisterUserDTO;
 import com.noyex.tododata.DTOs.UserDTO;
+import com.noyex.tododata.DTOs.UserToUpdateDTO;
 import com.noyex.tododata.model.Role;
 import com.noyex.tododata.model.User;
 import com.noyex.tododata.repository.UserRepository;
@@ -33,7 +34,7 @@ public class AdminPanelController {
     }
 
     @PutMapping("/update/{userId}")
-    public ResponseEntity<User> changeRole(@PathVariable Long userId, @RequestBody UserDTO userDTO){
-        return ResponseEntity.ok(userService.updateUser(userDTO, userId));
+    public ResponseEntity<User> updateUserDetails(@RequestBody UserToUpdateDTO userToUpdateDTO, @PathVariable Long userId) {
+        return ResponseEntity.ok(userService.updateUserDetails(userToUpdateDTO, userId));
     }
 }

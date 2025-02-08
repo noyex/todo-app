@@ -1,6 +1,7 @@
 package com.noyex.todoservice.service;
 
 import com.noyex.tododata.DTOs.UserDTO;
+import com.noyex.tododata.DTOs.UserToUpdateDTO;
 import com.noyex.tododata.model.User;
 import com.noyex.tododata.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -79,6 +80,19 @@ public class UserService implements IUserService {
     public User getUserById(Long userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
+    }
+
+    @Override
+    public User updateUserDetails(UserToUpdateDTO userToUpdateDTO, Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if(user.isEmpty()) {
+            throw new IllegalArgumentException("User not found");
+        }
+        User existingUser = user.get();
+        existingUser.setUsername(userToUpdateDTO.getUsername());
+        existingUser.setEmail(userToUpdateDTO.getEmail());
+        existingUser.setRole(userToUpdateDTO.getRole());
+        return userRepository.save(existingUser);
     }
 
     private void validateUser(UserDTO user) {

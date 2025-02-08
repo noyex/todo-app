@@ -33,7 +33,7 @@ public class AuthenticationController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/singup")
+    @PostMapping("/signup")
     public ResponseEntity<User> register(@RequestBody RegisterUserDTO registerUserDTO){
         logger.info("Received signup request for user: {}", registerUserDTO.getEmail());
         User registeredUser = authenticationService.signup(registerUserDTO);

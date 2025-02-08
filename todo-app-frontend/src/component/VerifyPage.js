@@ -12,16 +12,18 @@ const VerifyPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     const verificationData = {
       email,
       verificationCode,
     };
-
+  
     try {
       await verify(verificationData);
       setSuccess('Weryfikacja zakończona sukcesem. Możesz się teraz zalogować.');
-      navigate('/login');
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000); // Dodajemy małe opóźnienie, żeby użytkownik zobaczył komunikat o sukcesie
     } catch (error) {
       setError(error.message);
     }

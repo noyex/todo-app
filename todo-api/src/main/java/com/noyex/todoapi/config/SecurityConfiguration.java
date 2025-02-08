@@ -1,6 +1,8 @@
 package com.noyex.todoapi.config;
 
 import com.noyex.todoservice.config.JwtAuthenticationFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -20,6 +22,9 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+
+    private static final Logger logger = LoggerFactory.getLogger(SecurityConfiguration.class);
+
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
@@ -44,8 +49,10 @@ public class SecurityConfiguration {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
+        logger.info("Security configuration loaded successfully");
         return http.build();
     }
 
@@ -55,9 +62,11 @@ public class SecurityConfiguration {
         configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:8080"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
+        logger.info("CORS configuration loaded successfully");
         return source;
     }
 

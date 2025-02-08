@@ -9,6 +9,8 @@ import com.noyex.tododata.model.User;
 import com.noyex.tododata.repository.UserRepository;
 import com.noyex.todoservice.service.AuthenticationService;
 import com.noyex.todoservice.service.JwtService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +24,9 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
     private final UserRepository userRepository;
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
+
+
     public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService, UserRepository userRepository) {
         this.jwtService = jwtService;
         this.authenticationService = authenticationService;
@@ -30,7 +35,9 @@ public class AuthenticationController {
 
     @PostMapping("/singup")
     public ResponseEntity<User> register(@RequestBody RegisterUserDTO registerUserDTO){
+        logger.info("Received signup request for user: {}", registerUserDTO.getEmail());
         User registeredUser = authenticationService.signup(registerUserDTO);
+        logger.info("User registered: " + registeredUser.getEmail());
         return ResponseEntity.ok(registeredUser);
     }
 

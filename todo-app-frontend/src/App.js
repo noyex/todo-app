@@ -1,12 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { isAuthenticated } from './service/authService';
-import LoginPage from './component/LoginPage';
-import RegisterPage from './component/RegisterPage';
-import VerifyPage from './component/VerifyPage';
-import TodoPage from './component/TodoPage';
-import HomePage from './component/HomePage';
+import LoginPage from './components/LoginPage';
+import RegisterPage from './components/RegisterPage';
+import VerifyPage from './components/VerifyPage';
+import TodoPage from './components/TodoPage';
+import HomePage from './components/HomePage'; // zmiana ścieżki z './pages/HomePage' na './component/HomePage'
 import './App.css';
+
+// ... reszta kodu pozostaje bez zmian
 
 // Komponent chroniony - wymaga autoryzacji
 const PrivateRoute = ({ children }) => {

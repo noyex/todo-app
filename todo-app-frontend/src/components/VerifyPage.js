@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { verify } from '../service/authService';
-import '../style/VerifyPage.css';
+import '../styles/VerifyPage.css';
 
 const VerifyPage = () => {
   const [email, setEmail] = useState('');

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaCheckCircle, FaUserPlus, FaSignInAlt } from 'react-icons/fa';
-import '../style/HomePage.css';
+import '../styles/HomePage.css';
 import logo from '../icon/done.png';
 
 const HomePage = () => {

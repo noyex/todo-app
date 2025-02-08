@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllTodos, addTodo, updateTodo, deleteTodo } from '../service/todoService';
-import TodoList from '../components/TodoList';
-import AddTodoForm from '../components/AddTodoForm';
+import TodoList from './TodoList';
+import AddTodoForm from './AddTodoForm';
 import '../styles/TodoPage.css';
 
 const TodoPage = () => {

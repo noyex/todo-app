@@ -5,6 +5,8 @@ import com.noyex.tododata.DTOs.UserToUpdateDTO;
 import com.noyex.tododata.DTOs.updateUser.UpdateEmailDTO;
 import com.noyex.tododata.DTOs.updateUser.UpdateNameDTO;
 import com.noyex.tododata.DTOs.updateUser.UpdatePassDTO;
+import com.noyex.tododata.DTOs.updateUser.UpdateRoleDTO;
+import com.noyex.tododata.model.Role;
 import com.noyex.tododata.model.User;
 import com.noyex.tododata.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -122,44 +124,11 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User updateUserEmail(UpdateEmailDTO updateEmailDTO, Long userId) {
-        Optional<User> userOptional = userRepository.findById(userId);
-        if(userOptional.isEmpty()) {
-            throw new IllegalArgumentException("User not found");
-        }
-        User user = userOptional.get();
-        try{
-            boolean checkPassword = user.checkPassword(updateEmailDTO.getPassword());
-            if(checkPassword){
-                boolean existsByEmail = userRepository.existsByEmail(updateEmailDTO.getEmail());
-                if(existsByEmail){
-                    throw new IllegalArgumentException("Email already in use");
-                }
-                user.setEmail(updateEmailDTO.getEmail());
-                return userRepository.save(user);
-            }
-        } catch (Exception e){
-            throw new IllegalArgumentException("Invalid password");
-        }
-        return user;
-    }
-
-    @Override
-    public User updateUserPassword(UpdatePassDTO updatePassDTO, Long userId) {
-        Optional<User> userOptional = userRepository.findById(userId);
-        if(userOptional.isEmpty()) {
-            throw new IllegalArgumentException("User not found");
-        }
-        User user = userOptional.get();
-        try {
-            if(updatePassDTO.getPassword().equals(user.getPassword())){
-                user.setPassword(updatePassDTO.getNewPassword());
-                return userRepository.save(user);
-            }
-        } catch (Exception e){
-            throw new IllegalArgumentException("Invalid password");
-        }
-        return null;
+    public User updateUserRole(UpdateRoleDTO input, Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        user.setRole(input.getRole());
+        return userRepository.save(user);
     }
 
 

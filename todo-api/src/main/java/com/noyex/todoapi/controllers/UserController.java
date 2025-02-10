@@ -1,9 +1,12 @@
 package com.noyex.todoapi.controllers;
 
 import com.noyex.tododata.DTOs.UserDTO;
+import com.noyex.tododata.DTOs.updateUser.UpdateNameDTO;
 import com.noyex.tododata.model.User;
 import com.noyex.tododata.repository.UserRepository;
 import com.noyex.todoservice.service.IUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,6 +48,13 @@ public class UserController {
     public ResponseEntity<?> deleteUser(@PathVariable Long userId){
         userService.deleteUser(userId);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/update/{userId}/name")
+    public ResponseEntity<?> updateUserName(@RequestBody UpdateNameDTO updateNameDTO,
+                                            @PathVariable Long userId) {
+        User updatedUser = userService.updateUserName(updateNameDTO, userId);
+        return ResponseEntity.ok(updatedUser);
     }
 
 //    @PutMapping("/update/{userId}")

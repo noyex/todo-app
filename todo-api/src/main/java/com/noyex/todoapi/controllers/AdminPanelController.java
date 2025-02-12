@@ -33,8 +33,8 @@ public class AdminPanelController {
         this.userRepository = userRepository;
     }
 
-    @PutMapping("/update/{userId}")
-    public ResponseEntity<User> updateUserDetails(@RequestBody UserToUpdateDTO userToUpdateDTO, @PathVariable Long userId) {
-        return ResponseEntity.ok(userService.updateUserDetails(userToUpdateDTO, userId));
-    }
+//    @PutMapping("/update/{userId}")
+//    public ResponseEntity<User> updateUserDetails(@RequestBody UserToUpdateDTO userToUpdateDTO, @PathVariable Long userId) {
+//        return ResponseEntity.ok(userService.updateUserDetails(userToUpdateDTO, userId));
+//    }
 }

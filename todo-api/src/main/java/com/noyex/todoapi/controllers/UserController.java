@@ -33,12 +33,12 @@ public class UserController {
         this.authenticationService = authenticationService;
     }
 
-    @GetMapping("/me")
-    public ResponseEntity<User> authenticatedUser(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User currentUser = (User) authentication.getPrincipal();
-        return ResponseEntity.ok(currentUser);
-    }
+//    @GetMapping("/me")
+//    public ResponseEntity<User> authenticatedUser(){
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        User currentUser = (User) authentication.getPrincipal();
+//        return ResponseEntity.ok(currentUser);
+//    }
 
     @GetMapping("/all")
     public ResponseEntity<?> getAllUsers(){
@@ -109,11 +109,5 @@ public class UserController {
         User updatedUser = userService.updateUserRole(input, userId);
         return ResponseEntity.ok(updatedUser);
     }
-
-
-//    @PutMapping("/update/{userId}")
-//    public ResponseEntity<?> updateUser(@RequestBody UserDTO user, @PathVariable Long userId){
-//        return ResponseEntity.ok(userService.updateUser(user, userId));
-//    }
 
 }

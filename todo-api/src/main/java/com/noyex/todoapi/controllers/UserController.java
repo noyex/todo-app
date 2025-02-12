@@ -27,18 +27,25 @@ public class UserController {
 
     private final IUserService userService;
     private final IAuthenticationService authenticationService;
+    private final UserRepository userRepository;
 
-    public UserController(IUserService userService, IAuthenticationService authenticationService) {
+    public UserController(IUserService userService, IAuthenticationService authenticationService, UserRepository userRepository) {
         this.userService = userService;
         this.authenticationService = authenticationService;
+        this.userRepository = userRepository;
     }
 
-//    @GetMapping("/me")
-//    public ResponseEntity<User> authenticatedUser(){
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        User currentUser = (User) authentication.getPrincipal();
-//        return ResponseEntity.ok(currentUser);
-//    }
+    @GetMapping("/me")
+    public ResponseEntity<User> authenticatedUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = (User) authentication.getPrincipal();
+        return ResponseEntity.ok(currentUser);
+    }
+
+    @GetMapping("/by-email/{email}")
+    public ResponseEntity<?> getUserByEmail(@PathVariable String email){
+        return ResponseEntity.ok(userService.getUserByEmail(email));
+    }
 
     @GetMapping("/all")
     public ResponseEntity<?> getAllUsers(){

@@ -131,6 +131,14 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
+    @Override
+    public User getUserByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if(user.isEmpty()) {
+            throw new IllegalArgumentException("User not found");
+        }
+        return user.get();
+    }
 
 
     private void validateUser(UserDTO user) {

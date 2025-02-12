@@ -22,4 +22,5 @@ public interface IUserService {
     User updateUserDetails(UserToUpdateDTO userToUpdateDTO, Long userId);
     User updateUserName(UpdateNameDTO updateNameDTO, Long userId);
     User updateUserRole(UpdateRoleDTO input, Long userId);
+    User getUserByEmail(String email);
 }

@@ -1,12 +1,10 @@
 {
-  "name": "frontend",
+  "name": "todo-app-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@tanstack/react-query": "^5.66.0",
     "axios": "^1.7.9",
     "cra-template": "1.2.0",
-    "jwt-decode": "^4.0.0",
     "react": "^19.0.0",
     "react-datepicker": "^8.0.0",
     "react-dom": "^19.0.0",
@@ -33,7 +31,6 @@
       "not dead",
       "not op_mini all"
     ],
-    "proxy": "http://localhost:8080",
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",

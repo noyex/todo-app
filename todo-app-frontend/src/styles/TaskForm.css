@@ -1,0 +1,51 @@
+.task-form {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.task-form h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #007aff;
+}
+
+.task-form input,
+.task-form textarea,
+.task-form select,
+.task-form .react-datepicker-wrapper {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.task-form button {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  background-color: #007aff;
+  color: white;
+}
+
+.task-form button:hover {
+  background-color: #0056b3;
+}
+
+.task-form .btn-secondary {
+  background-color: #cccccc;
+  color: black;
+}
+
+.task-form .btn-secondary:hover {
+  background-color: #aaaaaa;
+}

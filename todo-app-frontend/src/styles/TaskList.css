@@ -1,0 +1,9 @@
+.task-list {
+  width: 100%;
+}
+
+.task-list h2 {
+  font-size: 2rem;
+  color: #007aff;
+  margin-bottom: 1.5rem;
+}

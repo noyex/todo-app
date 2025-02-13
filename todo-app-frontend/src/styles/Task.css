@@ -1,0 +1,51 @@
+.task {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.task.completed {
+  background: rgba(0, 122, 255, 0.2);
+}
+
+.task h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #007aff;
+}
+
+.task p {
+  margin: 0.5rem 0;
+  color: #1d1d1f;
+}
+
+.task .category-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+.task-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.task-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #007aff;
+  transition: color 0.2s ease;
+}
+
+.task-actions button:hover {
+  color: #0056b3;
+}

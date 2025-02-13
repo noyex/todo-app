@@ -8,6 +8,7 @@ A simple task management application designed to help users organize and manage 
 
 ### Backend
 - Developed with **Java** and **Spring Boot**.
+- Multi-module project
 - Secure user authentication system:
   - User registration and login using **JWT (JSON Web Tokens)**.
   - Bearer token-based authentication for API security.

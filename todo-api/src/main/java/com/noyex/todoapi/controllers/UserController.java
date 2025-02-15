@@ -1,6 +1,7 @@
 package com.noyex.todoapi.controllers;
 
 import com.noyex.tododata.DTOs.UserDTO;
+import com.noyex.tododata.DTOs.ViewUserDTO;
 import com.noyex.tododata.DTOs.updateUser.UpdateEmailDTO;
 import com.noyex.tododata.DTOs.updateUser.UpdateNameDTO;
 import com.noyex.tododata.DTOs.updateUser.UpdatePassDTO;
@@ -43,15 +44,13 @@ public class UserController {
     }
 
     @GetMapping("/by-email/{email}")
-    public ResponseEntity<?> getUserByEmail(@PathVariable String email){
+    public ResponseEntity<ViewUserDTO> getUserByEmail(@PathVariable String email){
         return ResponseEntity.ok(userService.getUserByEmail(email));
     }
 
     @GetMapping("/all")
-    public ResponseEntity<?> getAllUsers(){
-        List<User> users = userService.getAllUsers();
-        System.out.println("Znaleziono użytkowników: " + users.size());
-        return ResponseEntity.ok(users);
+    public ResponseEntity<List<ViewUserDTO>> getAllUsers(){
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @GetMapping("/get/{userId}")

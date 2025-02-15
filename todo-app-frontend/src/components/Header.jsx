@@ -6,6 +6,9 @@ const Header = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
+  // Assuming the role is stored in localStorage after login
+  const role = localStorage.getItem('role'); 
+
   const handleDashboardClick = () => {
     if (token) {
       navigate('/dashboard');
@@ -24,6 +27,7 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
     navigate('/login');
   };
 
@@ -37,6 +41,9 @@ const Header = () => {
               <>
                 <li><a href="#!" onClick={handleDashboardClick}>Dashboard</a></li>
                 <li><a href="#!" onClick={handleProfileClick}>Profile</a></li>
+                {role === 'ADMIN' && (
+                  <li><Link to="/admin">Admin Panel</Link></li>
+                )}
                 <li><button onClick={handleLogout} className="logout-button">Logout</button></li>
               </>
             ) : (

@@ -1,11 +1,102 @@
 .admin-panel {
-    background: rgba(255, 255, 255, 0.8);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 2rem;
-  }
-  
-  .admin-panel h2 {
-    margin-bottom: 1rem;
-  }
+  padding: 2rem;
+  background: linear-gradient(135deg, #ece9e6, #ffffff);
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #1d1d1f;
+}
+
+.admin-panel h1 {
+  color: #007aff;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+.admin-panel section {
+  margin-bottom: 3rem;
+}
+
+.admin-panel h2 {
+  color: #007aff;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  border-bottom: 2px solid #007aff;
+  padding-bottom: 0.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table thead tr {
+  background: rgba(0, 122, 255, 0.1);
+}
+
+table th, table td {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+table td select,
+table td input[type="text"],
+table td input[type="color"] {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.update-btn, .delete-btn {
+  padding: 0.4rem 0.8rem;
+  margin-right: 0.4rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.update-btn {
+  background-color: #007aff;
+  color: white;
+}
+
+.delete-btn {
+  background-color: #ff3b30;
+  color: white;
+}
+
+.add-category {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.add-category input[type="text"] {
+  flex: 2;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-category input[type="color"] {
+  flex: 1;
+  border: none;
+  background: none;
+}
+
+.add-category button {
+  flex: 1;
+  background-color: #007aff;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.add-category button:hover {
+  background-color: #005bb5;
+}

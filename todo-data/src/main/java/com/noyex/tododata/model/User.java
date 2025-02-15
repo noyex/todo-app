@@ -91,6 +91,10 @@ public class User implements UserDetails {
         return email;
     }
 
+    public String getRealUsername() {
+        return username;
+    }
+
     public void setPassword(String password) {
         if (password == null || password.trim().isEmpty()) {
             throw new IllegalArgumentException("Password cannot be empty");

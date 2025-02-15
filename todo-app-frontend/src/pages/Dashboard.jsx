@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TaskList from '../components/TaskList';
 import TaskForm from '../components/TaskForm';
-import AdminPanel from '../components/AdminPanel';
 import '../styles/Dashboard.css';
 
 const Dashboard = () => {
@@ -115,7 +114,6 @@ const Dashboard = () => {
               editingTask={editingTask}
               onUpdateTask={handleUpdateTask}
             />
-            {user.role === 'ADMIN' && <AdminPanel />}
           </div>
         </div>
       )}

@@ -2,6 +2,7 @@ package com.noyex.todoservice.service;
 
 import com.noyex.tododata.DTOs.UserDTO;
 import com.noyex.tododata.DTOs.UserToUpdateDTO;
+import com.noyex.tododata.DTOs.ViewUserDTO;
 import com.noyex.tododata.DTOs.updateUser.UpdateEmailDTO;
 import com.noyex.tododata.DTOs.updateUser.UpdateNameDTO;
 import com.noyex.tododata.DTOs.updateUser.UpdatePassDTO;
@@ -47,8 +48,10 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<ViewUserDTO> getAllUsers() {
+        return userRepository.findAll().stream()
+                .map(user -> new ViewUserDTO(user.getId(), user.getRealUsername(), user.getEmail(), user.getRole().name()))
+                .toList();
     }
 
     @Override
@@ -132,12 +135,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User getUserByEmail(String email) {
+    public ViewUserDTO getUserByEmail(String email) {
         Optional<User> user = userRepository.findByEmail(email);
         if(user.isEmpty()) {
             throw new IllegalArgumentException("User not found");
         }
-        return user.get();
+        User existingUser = user.get();
+        return new ViewUserDTO(existingUser.getId(), existingUser.getRealUsername(), existingUser.getEmail(), existingUser.getRole().name());
     }
 
 

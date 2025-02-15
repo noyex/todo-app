@@ -27,33 +27,38 @@
   }
   
   .header-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
+    list-style-type: none;
     margin: 0;
     padding: 0;
+    display: flex; /* Użycie flexboxa dla wyrównania elementów w jednym rzędzie */
+    align-items: center; /* Wyrównanie elementów w pionie */
   }
   
-  .header-nav a, .header-nav button {
+  .header-nav li {
+    margin-right: 20px; /* Odstęp pomiędzy elementami nawigacyjnymi */
+  }
+  
+  /* Stylizacja linków, jeśli jest potrzebna */
+  .header-nav a {
     text-decoration: none;
-    color: #1d1d1f;
-    font-size: 0.9rem;
-    transition: color 0.2s ease;
+    color: inherit;
+    padding: 8px 12px;
   }
   
-  .header-nav a:hover, .header-nav button:hover {
-    color: #0066cc;
-  }
-  
+  /* Stylizacja przycisku logout, aby pasował do linków */
   .logout-button {
-    background: none;
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0;
     border: none;
+    background: none;
+    color: inherit;
     cursor: pointer;
-    font-size: 0.9rem;
-    color: #1d1d1f;
-    transition: color 0.2s ease;
+    font-size: inherit;
   }
   
-  .logout-button:hover {
-    color: #0066cc;
+  /* Dodatkowo możesz dodać styl :hover, jeśli chcesz uzyskać efekt jak dla linków */
+  .logout-button:hover,
+  .header-nav a:hover {
+    opacity: 0.8;
   }

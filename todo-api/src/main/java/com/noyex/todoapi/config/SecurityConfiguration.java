@@ -42,7 +42,11 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/categories/add").hasRole("ADMIN")
+                        .requestMatchers("/api/categories/delete").hasRole("ADMIN")
+                        .requestMatchers("/api/categories/update").hasRole("ADMIN")
+                        .requestMatchers("/api/users/delete").hasRole("ADMIN")
+                        .requestMatchers("/api/users/update/{userId}/role").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session

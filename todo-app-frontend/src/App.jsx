@@ -9,6 +9,7 @@ import Verify from './pages/Verify';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import './App.css';
+import AdminPanel from './components/AdminPanel';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
           <Route path="/verify" element={<Verify />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/admin" element={<AdminPanel />} />
+
         </Routes>
       </main>
       <Footer />

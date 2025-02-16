@@ -29,7 +29,7 @@ A simple task management application designed to help users organize and manage 
 ![Welcome Page](./images/home.png)
 
 ### Dashboard
-![Dashboard](./images/dashboard.png)
+![Dashboard](./images/panel.png)
 
 ### Features Page
 ![Dashboard](./images/features.png)

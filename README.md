@@ -1,3 +1,8 @@
+
+![Dashboard](./images/calendar-popup.png)
+
+---
+
 # Basic Todo App
 
 A simple task management application designed to help users organize and manage their daily tasks. The **backend** is built using **Java** and the **Spring Framework**, while the **frontend** was created as a fun experiment using AI tools.
@@ -39,8 +44,5 @@ A simple task management application designed to help users organize and manage 
 
 ### Profile
 ![Dashboard](./images/profile.png)
-
-### Calendar with popup
-![Dashboard](./images/calendar-popup.png)
 
 ---

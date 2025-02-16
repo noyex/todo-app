@@ -161,97 +161,114 @@ const AdminPanel = () => {
   };
 
   return (
-    <div className="admin-panel">
+    <div className="dashboard-page">
       <h1>Panel Administratora</h1>
+      <div className="dashboard-content">
+        <div className="admin-container">
+          <div className="section users-section">
+            <h2>Zarządzanie Użytkownikami</h2>
+            <div className="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Mail</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Opcje</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {users.map(user => (
+                    <tr key={user.id}>
+                      <td>{user.id}</td>
+                      <td>{user.mail}</td>
+                      <td>{user.username}</td>
+                      <td>
+                        <select 
+                          value={user.role}
+                          onChange={(e) => handleRoleChange(user.id, e.target.value)}
+                          className="role-select"
+                        >
+                          <option value="USER">USER</option>
+                          <option value="ADMIN">ADMIN</option>
+                        </select>
+                      </td>
+                      <td className="action-buttons">
+                        <button className="delete-btn" onClick={() => handleDeleteUser(user.id)}>
+                          Usuń
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-      <section className="user-management">
-        <h2>Zarządzanie Użytkownikami</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Mail</th>
-              <th>Username</th>
-              <th>Role</th>
-              <th>Opcje</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map(user => (
-              <tr key={user.id}>
-                <td>{user.id}</td>
-                <td>{user.mail}</td>
-                <td>{user.username}</td>
-                <td>
-                  <select 
-                    value={user.role}
-                    onChange={(e) => handleRoleChange(user.id, e.target.value)}
-                  >
-                    <option value="USER">USER</option>
-                    <option value="ADMIN">ADMIN</option>
-                  </select>
-                </td>
-                <td>
-                  <button className="update-btn">Aktualizuj dane</button>
-                  <button className="delete-btn" onClick={() => handleDeleteUser(user.id)}>Usuń</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
-
-      <section className="category-management">
-        <h2>Zarządzanie Kategoriami</h2>
-        <div className="add-category">
-          <input 
-            type="text"
-            placeholder="Nazwa kategorii"
-            value={newCategoryName}
-            onChange={(e) => setNewCategoryName(e.target.value)}
-          />
-          <input 
-            type="color"
-            value={newCategoryColor}
-            onChange={(e) => setNewCategoryColor(e.target.value)}
-          />
-          <button onClick={handleAddCategory}>Dodaj kategorię</button>
+          <div className="section categories-section">
+            <h2>Zarządzanie Kategoriami</h2>
+            <div className="add-category">
+              <input 
+                type="text"
+                placeholder="Nazwa kategorii"
+                value={newCategoryName}
+                onChange={(e) => setNewCategoryName(e.target.value)}
+                className="category-input"
+              />
+              <input 
+                type="color"
+                value={newCategoryColor}
+                onChange={(e) => setNewCategoryColor(e.target.value)}
+                className="color-input"
+              />
+              <button onClick={handleAddCategory} className="add-btn">
+                Dodaj kategorię
+              </button>
+            </div>
+            <div className="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nazwa</th>
+                    <th>Kolor</th>
+                    <th>Opcje</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {categories.map(category => (
+                    <tr key={category.id}>
+                      <td>{category.id}</td>
+                      <td>
+                        <input 
+                          type="text"
+                          defaultValue={category.name}
+                          onBlur={(e) => handleUpdateCategory(category.id, e.target.value, category.color)}
+                          className="category-name-input"
+                        />
+                      </td>
+                      <td>
+                        <input 
+                          type="color"
+                          defaultValue={category.color}
+                          onBlur={(e) => handleUpdateCategory(category.id, category.name, e.target.value)}
+                          className="color-input"
+                        />
+                      </td>
+                      <td>
+                        <button className="delete-btn" onClick={() => handleDeleteCategory(category.id)}>
+                          Usuń
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nazwa</th>
-              <th>Kolor</th>
-              <th>Opcje</th>
-            </tr>
-          </thead>
-          <tbody>
-            {categories.map(category => (
-              <tr key={category.id}>
-                <td>{category.id}</td>
-                <td>
-                  <input 
-                    type="text"
-                    defaultValue={category.name}
-                    onBlur={(e) => handleUpdateCategory(category.id, e.target.value, category.color)}
-                  />
-                </td>
-                <td>
-                  <input 
-                    type="color"
-                    defaultValue={category.color}
-                    onBlur={(e) => handleUpdateCategory(category.id, category.name, e.target.value)}
-                  />
-                </td>
-                <td>
-                  <button className="delete-btn" onClick={() => handleDeleteCategory(category.id)}>Usuń</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
+      </div>
     </div>
   );
 };

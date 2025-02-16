@@ -27,17 +27,31 @@ const TaskForm = ({ userId, categories, fetchTasks, editingTask, onUpdateTask })
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isEditing) {
-      onUpdateTask({
-        id: editingTask.id,
-        title,
-        description,
-        category: { id: categoryId },
-        dueTo: dueTo.toISOString(),
-        priority,
-        done: editingTask.done,
-        user: { id: userId },
-        updatedAt: new Date().toISOString(),
+      const token = localStorage.getItem('token');
+      // Zmieniony endpoint na prawidłowy
+      const response = await fetch(`http://localhost:8080/api/todos/update/${editingTask.id}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title,
+          description,
+          category_id: categoryId,
+          due_to: dueTo.toISOString(),
+          priority,
+          done: editingTask.done,
+          updated_at: new Date().toISOString(),
+        }),
       });
+      
+      if (response.ok) {
+        fetchTasks();
+        resetForm();
+      } else {
+        console.error('Failed to update task');
+      }
     } else {
       const token = localStorage.getItem('token');
       const response = await fetch(`http://localhost:8080/api/todos/add/${userId}`, {
@@ -73,41 +87,87 @@ const TaskForm = ({ userId, categories, fetchTasks, editingTask, onUpdateTask })
   };
 
   return (
-    <form className="task-form" onSubmit={handleSubmit}>
-      <h2>{isEditing ? 'Edit Task' : 'Add Task'}</h2>
-      <input
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-      />
-      <textarea
-        placeholder="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        required
-      ></textarea>
-      <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)} required>
-        <option value="" disabled>Select Category</option>
-        {categories.map((category) => (
-          <option key={category.id} value={category.id}>
-            {category.name}
-          </option>
-        ))}
-      </select>
-      <DatePicker selected={dueTo} onChange={(date) => setDueTo(date)} showTimeSelect dateFormat="Pp" />
-      <select value={priority} onChange={(e) => setPriority(e.target.value)} required>
-        <option value="LOW">Low</option>
-        <option value="MEDIUM">Medium</option>
-        <option value="HIGH">High</option>
-      </select>
-      <button type="submit" className="btn btn-primary">{isEditing ? 'Update Task' : 'Add Task'}</button>
-      {isEditing && (
-        <button type="button" className="btn btn-secondary" onClick={resetForm}>
-          Cancel
+    <form onSubmit={handleSubmit} className="task-form">
+      <h2>{isEditing ? 'Edit Task' : 'Add New Task'}</h2>
+      
+      <div className="form-group">
+        <label htmlFor="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+          placeholder="Enter task title"
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="description">Description</label>
+        <textarea
+          id="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          rows="3"
+          placeholder="Enter task description"
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="categoryId">Category</label>
+        <select
+          id="categoryId"
+          value={categoryId}
+          onChange={(e) => setCategoryId(e.target.value)}
+          required
+        >
+          <option value="">Select a category</option>
+          {categories.map(category => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="dueTo">Due Date</label>
+        <DatePicker
+          selected={dueTo}
+          onChange={(date) => setDueTo(date)}
+          showTimeSelect
+          dateFormat="Pp"
+          className="date-picker"
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="priority">Priority</label>
+        <select
+          id="priority"
+          value={priority}
+          onChange={(e) => setPriority(e.target.value)}
+          required
+        >
+          <option value="LOW">Low</option>
+          <option value="MEDIUM">Medium</option>
+          <option value="HIGH">High</option>
+          <option value="URGENT">Urgent</option>
+        </select>
+      </div>
+
+      <div className="form-actions">
+        <button type="submit" className="submit-button">
+          {isEditing ? 'Update Task' : 'Add Task'}
         </button>
-      )}
+        {isEditing && (
+          <button type="button" className="cancel-button" onClick={resetForm}>
+            Cancel
+          </button>
+        )}
+      </div>
     </form>
   );
 };

@@ -96,4 +96,32 @@ public class ToDoService implements IToDoService {
         }
         toDoRepository.deleteById(toDoId);
     }
+
+    @Override
+    public void markAsDone(Long toDoId) {
+        Optional<ToDo> toDoOptional = toDoRepository.findById(toDoId);
+        if (toDoOptional.isEmpty()) {
+            throw new IllegalArgumentException("ToDo not found");
+        }
+        ToDo existingToDo = toDoOptional.get();
+        existingToDo.setDone(!existingToDo.isDone());
+        if(existingToDo.getCompletedAt() == null) {
+            existingToDo.setCompletedAt(LocalDateTime.now());
+        } else {
+            existingToDo.setCompletedAt(null);
+        }
+        toDoRepository.save(existingToDo);
+    }
+
+    @Override
+    public List<ToDo> getDoneToDosByUserId(Long userId) {
+        return toDoRepository.findByUserIdAndDoneIsTrue(userId);
+    }
+
+    @Override
+    public List<ToDo> getNotDoneToDosByUserId(Long userId) {
+        return toDoRepository.findByUserIdAndDoneIsFalse(userId);
+    }
+
+
 }

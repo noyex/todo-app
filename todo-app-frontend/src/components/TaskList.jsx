@@ -5,13 +5,19 @@ import '../styles/TaskList.css';
 const TaskList = ({ tasks, fetchTasks, onEditTask }) => {
   return (
     <div className="task-list">
-      <h2>Your Tasks</h2>
-      {tasks.length > 0 ? (
-        tasks.map((task) => (
-          <Task key={task.id} task={task} fetchTasks={fetchTasks} onEditTask={onEditTask} />
-        ))
+      {tasks.length === 0 ? (
+        <p className="empty-message">No tasks available</p>
       ) : (
-        <p>No tasks available.</p>
+        <div className="tasks-grid">
+          {tasks.map((task) => (
+            <Task
+              key={task.id}
+              task={task}
+              fetchTasks={fetchTasks}
+              onEditTask={onEditTask}
+            />
+          ))}
+        </div>
       )}
     </div>
   );

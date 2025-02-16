@@ -21,6 +21,16 @@ public class ToDoController {
         return ResponseEntity.ok(toDoService.getListOfToDosByUserId(userId));
     }
 
+    @GetMapping("/all/done/{userId}")
+    public ResponseEntity<?> getDoneToDosByUserId(@PathVariable Long userId){
+        return ResponseEntity.ok(toDoService.getDoneToDosByUserId(userId));
+    }
+
+    @GetMapping("/all/not-done/{userId}")
+    public ResponseEntity<?> getNotDoneToDosByUserId(@PathVariable Long userId){
+        return ResponseEntity.ok(toDoService.getNotDoneToDosByUserId(userId));
+    }
+
     @GetMapping("/all")
     public ResponseEntity<?> getAllToDos(){
         return ResponseEntity.ok(toDoService.getListOfAllToDos());
@@ -41,5 +51,9 @@ public class ToDoController {
         return ResponseEntity.ok(toDoService.update(toDo, toDoId));
     }
 
-
+    @PutMapping("/mark-as-done/{toDoId}")
+    public ResponseEntity<?> markAsDone(@PathVariable Long toDoId){
+        toDoService.markAsDone(toDoId);
+        return ResponseEntity.ok("Marked");
+    }
 }

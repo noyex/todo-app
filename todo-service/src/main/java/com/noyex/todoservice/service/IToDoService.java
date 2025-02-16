@@ -12,4 +12,7 @@ public interface IToDoService {
     ToDo saveForUser(ToDoDTO toDoDto, Long userId);
     ToDo update(ToDoDTO toDoDTO, Long toDoId);
     void delete(Long toDoId);
+    void markAsDone(Long toDoId);
+    List<ToDo> getDoneToDosByUserId(Long userId);
+    List<ToDo> getNotDoneToDosByUserId(Long userId);
 }

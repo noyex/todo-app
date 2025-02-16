@@ -1,9 +1,19 @@
 .task-list {
-  width: 100%;
+  padding: 1rem 2rem;
 }
 
-.task-list h2 {
-  font-size: 2rem;
-  color: #007aff;
-  margin-bottom: 1.5rem;
+.tasks-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.tasks-grid > * + * {
+  margin-top: 1rem;
+}
+
+.empty-message {
+  text-align: center;
+  color: #666;
+  padding: 2rem;
+  font-style: italic;
 }

@@ -131,116 +131,133 @@ const Profile = () => {
   };
 
   return (
-    <div className="profile-page">
-      {user ? (
-        <div className="profile-card">
-          <h1>Profile</h1>
-          <div className="profile-details">
-            <div className="profile-field">
-              <label>Username</label>
-              <div className="profile-field-value">
-                <span>{user.username}</span>
-                <button className="edit-button" onClick={() => setIsEditingUsername(!isEditingUsername)}>
-                  Edit
-                </button>
-              </div>
-              {isEditingUsername && (
-                <form className="edit-form" onSubmit={handleUsernameUpdate}>
-                  <input
-                    type="text"
-                    placeholder="New Username"
-                    value={newUsername}
-                    onChange={(e) => setNewUsername(e.target.value)}
-                    required
-                  />
-                  <input
-                    type="password"
-                    placeholder="Current Password"
-                    value={usernamePassword}
-                    onChange={(e) => setUsernamePassword(e.target.value)}
-                    required
-                  />
-                  <button type="submit">Save</button>
-                </form>
-              )}
-            </div>
+    <div className="dashboard-page">
+      <h1>Profile</h1>
+      <div className="dashboard-content">
+        {user ? (
+          <div className="profile-container">
+            <div className="profile-section">
+              <h2>User Details</h2>
+              
+              <div className="profile-field-group">
+                <div className="field-container">
+                  <label>Username</label>
+                  <div className="field-content">
+                    <span>{user.username}</span>
+                    <button 
+                      className="edit-button"
+                      onClick={() => setIsEditingUsername(!isEditingUsername)}
+                    >
+                      Edit
+                    </button>
+                  </div>
+                  {isEditingUsername && (
+                    <form className="edit-form" onSubmit={handleUsernameUpdate}>
+                      <input
+                        type="text"
+                        placeholder="New username"
+                        value={newUsername}
+                        onChange={(e) => setNewUsername(e.target.value)}
+                        required
+                      />
+                      <input
+                        type="password"
+                        placeholder="Actual password"
+                        value={usernamePassword}
+                        onChange={(e) => setUsernamePassword(e.target.value)}
+                        required
+                      />
+                      <button type="submit" className="save-button">Save</button>
+                    </form>
+                  )}
+                </div>
 
-            <div className="profile-field">
-              <label>Email</label>
-              <div className="profile-field-value">
-                <span>{user.mail}</span>
-                <button className="edit-button" onClick={() => setIsEditingEmail(!isEditingEmail)}>
-                  Edit
-                </button>
-              </div>
-              {isEditingEmail && (
-                <form className="edit-form" onSubmit={handleEmailUpdate}>
-                  <input
-                    type="email"
-                    placeholder="New Email"
-                    value={newEmail}
-                    onChange={(e) => setNewEmail(e.target.value)}
-                    required
-                  />
-                  <input
-                    type="password"
-                    placeholder="Current Password"
-                    value={emailPassword}
-                    onChange={(e) => setEmailPassword(e.target.value)}
-                    required
-                  />
-                  <button type="submit">Save</button>
-                </form>
-              )}
-            </div>
+                <div className="field-container">
+                  <label>Email</label>
+                  <div className="field-content">
+                    <span>{user.mail}</span>
+                    <button 
+                      className="edit-button"
+                      onClick={() => setIsEditingEmail(!isEditingEmail)}
+                    >
+                      Edit
+                    </button>
+                  </div>
+                  {isEditingEmail && (
+                    <form className="edit-form" onSubmit={handleEmailUpdate}>
+                      <input
+                        type="email"
+                        placeholder="New email"
+                        value={newEmail}
+                        onChange={(e) => setNewEmail(e.target.value)}
+                        required
+                      />
+                      <input
+                        type="password"
+                        placeholder="Actual password"
+                        value={emailPassword}
+                        onChange={(e) => setEmailPassword(e.target.value)}
+                        required
+                      />
+                      <button type="submit" className="save-button">Save</button>
+                    </form>
+                  )}
+                </div>
 
-            <div className="profile-field">
-              <label>Password</label>
-              <div className="profile-field-value">
-                <span>********</span>
-                <button className="edit-button" onClick={() => setIsEditingPassword(!isEditingPassword)}>
-                  Edit
-                </button>
-              </div>
-              {isEditingPassword && (
-                <form className="edit-form" onSubmit={handlePasswordUpdate}>
-                  <input
-                    type="email"
-                    placeholder="Your Email"
-                    value={updateEmail}
-                    onChange={(e) => setUpdateEmail(e.target.value)}
-                    required
-                  />
-                  <input
-                    type="password"
-                    placeholder="Old Password"
-                    value={oldPassword}
-                    onChange={(e) => setOldPassword(e.target.value)}
-                    required
-                  />
-                  <input
-                    type="password"
-                    placeholder="New Password"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    required
-                  />
-                  <button type="submit">Save</button>
-                </form>
-              )}
-            </div>
+                <div className="field-container">
+                  <label>Password</label>
+                  <div className="field-content">
+                    <span>********</span>
+                    <button 
+                      className="edit-button"
+                      onClick={() => setIsEditingPassword(!isEditingPassword)}
+                    >
+                      Edit
+                    </button>
+                  </div>
+                  {isEditingPassword && (
+                    <form className="edit-form" onSubmit={handlePasswordUpdate}>
+                      <input
+                        type="email"
+                        placeholder="Your email"
+                        value={updateEmail}
+                        onChange={(e) => setUpdateEmail(e.target.value)}
+                        required
+                      />
+                      <input
+                        type="password"
+                        placeholder="Old password"
+                        value={oldPassword}
+                        onChange={(e) => setOldPassword(e.target.value)}
+                        required
+                      />
+                      <input
+                        type="password"
+                        placeholder="New password"
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        required
+                      />
+                      <button type="submit" className="save-button">Zapisz</button>
+                    </form>
+                  )}
+                </div>
 
-            <div className="profile-field">
-              <label>Role</label>
-              <div className="profile-field-value">
-                <span>{user.role}</span>
+                <div className="field-container">
+                  <label>Role</label>
+                  <div className="field-content">
+                    <span className="role-badge">{user.role}</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+        ) : (
+          <div className="loading-container">
+            <p>Loading...</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

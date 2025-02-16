@@ -1,5 +1,5 @@
 package com.noyex.tododata.model;
 
 public enum Priority {
-    LOW, MEDIUM, HIGH
+    LOW, MEDIUM, HIGH, URGENT
 }

@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface ToDoRepository extends JpaRepository<ToDo, Long> {
     List<ToDo> findByUserId(Long userId);
-    List<ToDo> findByUserIdAndDone(Long userId, boolean done);
+    List<ToDo> findByUserIdAndDoneIsTrue(Long userId);
+    List<ToDo> findByUserIdAndDoneIsFalse(Long userId);
 }

@@ -1,51 +1,126 @@
 .task-form {
-  background: rgba(255, 255, 255, 0.8);
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .task-form h2 {
-  margin-bottom: 1.5rem;
   font-size: 1.5rem;
-  color: #007aff;
+  color: #1d1d1f;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
 }
 
-.task-form input,
-.task-form textarea,
-.task-form select,
-.task-form .react-datepicker-wrapper {
-  width: 100%;
-  padding: 0.8rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  font-size: 1rem;
-  background: rgba(255, 255, 255, 0.6);
+.form-group {
+  margin-bottom: 1.25rem;
 }
 
-.task-form button {
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select,
+.form-group .date-picker {
   width: 100%;
-  padding: 0.8rem;
-  border-radius: 10px;
+  padding: 0.75rem;
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  background-color: #f5f5f7;
+  font-size: 0.95rem;
+  color: #1d1d1f;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus,
+.form-group .date-picker:focus {
+  outline: none;
+  border-color: #007AFF;
+  background-color: white;
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+/* Style dla DatePicker */
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.date-picker {
+  width: 100% !important;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.submit-button,
+.cancel-button {
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-  border: none;
-  background-color: #007aff;
+  flex: 1;
+}
+
+.submit-button {
+  background-color: #007AFF;
   color: white;
+  border: none;
 }
 
-.task-form button:hover {
-  background-color: #0056b3;
+.submit-button:hover {
+  background-color: #0066CC;
+  transform: translateY(-1px);
 }
 
-.task-form .btn-secondary {
-  background-color: #cccccc;
-  color: black;
+.cancel-button {
+  background-color: #f5f5f7;
+  color: #666;
+  border: 1px solid #e1e1e1;
 }
 
-.task-form .btn-secondary:hover {
-  background-color: #aaaaaa;
+.cancel-button:hover {
+  background-color: #e1e1e1;
+  transform: translateY(-1px);
+}
+
+.submit-button:active,
+.cancel-button:active {
+  transform: translateY(0);
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+  .task-form {
+    padding: 0;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .form-group select,
+  .form-group .date-picker {
+    font-size: 16px;
+  }
 }

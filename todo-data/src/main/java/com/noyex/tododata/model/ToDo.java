@@ -7,7 +7,10 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 @Data
@@ -51,6 +54,19 @@ public class ToDo {
     private Priority priority;
 
 
+    public void setPriority(Priority priority) {
+        if (priority == null) {
+            throw new IllegalArgumentException("Priority cannot be null");
+        }
 
+        LocalDateTime dueTo = getDueTo();
+        LocalDateTime now = LocalDateTime.now();
 
+        if (now.isAfter(dueTo) || now.isEqual(dueTo)) {
+            this.priority = Priority.URGENT;
+            return;
+        }
+
+        this.priority = priority;
+    }
 }

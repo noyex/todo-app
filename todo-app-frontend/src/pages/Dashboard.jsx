@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TaskList from '../components/TaskList';
 import TaskForm from '../components/TaskForm';
+import TaskTabs from '../components/TaskTabs';
 import '../styles/Dashboard.css';
 
 const Dashboard = () => {
@@ -9,6 +10,7 @@ const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
   const [categories, setCategories] = useState([]);
   const [editingTask, setEditingTask] = useState(null);
+  const [activeTab, setActiveTab] = useState('all');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,6 +22,13 @@ const Dashboard = () => {
       fetchCategories(token);
     }
   }, [navigate]);
+
+  useEffect(() => {
+    if (user) {
+      const token = localStorage.getItem('token');
+      fetchTasks(user.id, token);
+    }
+  }, [user, activeTab]);
 
   const fetchUser = async (token) => {
     const email = parseJwt(token).sub;
@@ -39,7 +48,19 @@ const Dashboard = () => {
   };
 
   const fetchTasks = async (userId, token) => {
-    const response = await fetch(`http://localhost:8080/api/todos/all/${userId}`, {
+    let endpoint;
+    switch (activeTab) {
+      case 'done':
+        endpoint = `http://localhost:8080/api/todos/all/done/${userId}`;
+        break;
+      case 'not-done':
+        endpoint = `http://localhost:8080/api/todos/all/not-done/${userId}`;
+        break;
+      default:
+        endpoint = `http://localhost:8080/api/todos/all/${userId}`;
+    }
+
+    const response = await fetch(endpoint, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -104,7 +125,12 @@ const Dashboard = () => {
       {user && (
         <div className="dashboard-content">
           <div className="task-list-container">
-            <TaskList tasks={tasks} fetchTasks={() => fetchTasks(user.id, localStorage.getItem('token'))} onEditTask={handleEditTask} />
+            <TaskTabs activeTab={activeTab} onTabChange={setActiveTab} />
+            <TaskList 
+              tasks={tasks} 
+              fetchTasks={() => fetchTasks(user.id, localStorage.getItem('token'))} 
+              onEditTask={handleEditTask} 
+            />
           </div>
           <div className="task-form-container">
             <TaskForm

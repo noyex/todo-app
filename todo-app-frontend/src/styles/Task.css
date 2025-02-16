@@ -1,51 +1,108 @@
 .task {
-  background: rgba(255, 255, 255, 0.8);
+  background: #f5f5f7;
   padding: 1.5rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  position: relative;
   margin-bottom: 1rem;
-  transition: background-color 0.2s ease;
+}
+
+.completed-at {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-style: italic;
+  color: #999;
+  font-size: 0.85rem;
+}
+
+.task:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-color: #e1e1e1;
 }
 
 .task.completed {
-  background: rgba(0, 122, 255, 0.2);
+  background: rgba(52, 199, 89, 0.1);
+  border-color: rgba(52, 199, 89, 0.2);
 }
 
 .task h3 {
   margin: 0;
-  font-size: 1.5rem;
-  color: #007aff;
+  font-size: 1.2rem;
+  color: #1d1d1f;
+  font-weight: 600;
+}
+
+.task.completed h3 {
+  text-decoration: line-through;
+  color: #666;
 }
 
 .task p {
-  margin: 0.5rem 0;
-  color: #1d1d1f;
+  margin: 0.75rem 0;
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.4;
 }
 
 .task .category-dot {
   display: inline-block;
-  width: 12px;
-  height: 12px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   margin-right: 0.5rem;
-  vertical-align: middle;
+}
+
+.task .category-name {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.task .priority {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  background: rgba(0, 122, 255, 0.1);
+  color: #007AFF;
 }
 
 .task-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 1rem;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .task-actions button {
   background: none;
   border: none;
+  padding: 0.5rem;
+  border-radius: 8px;
+  color: #666;
   cursor: pointer;
-  font-size: 1.2rem;
-  color: #007aff;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .task-actions button:hover {
-  color: #0056b3;
+  background: rgba(0, 0, 0, 0.05);
+  color: #007AFF;
+}
+
+.toggle-done-button.done {
+  color: #34C759;
+}
+
+.toggle-done-button:hover {
+  color: #34C759;
+  background: rgba(52, 199, 89, 0.1);
+}
+.task:last-child {
+  margin-bottom: 0;
 }

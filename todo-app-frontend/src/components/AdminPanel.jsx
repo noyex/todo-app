@@ -162,11 +162,11 @@ const AdminPanel = () => {
 
   return (
     <div className="dashboard-page">
-      <h1>Panel Administratora</h1>
+      <h1>Admin AdminPanel</h1>
       <div className="dashboard-content">
         <div className="admin-container">
           <div className="section users-section">
-            <h2>Zarządzanie Użytkownikami</h2>
+            <h2>Manage users</h2>
             <div className="table-container">
               <table>
                 <thead>
@@ -175,7 +175,7 @@ const AdminPanel = () => {
                     <th>Mail</th>
                     <th>Username</th>
                     <th>Role</th>
-                    <th>Opcje</th>
+                    <th>Options</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -196,7 +196,7 @@ const AdminPanel = () => {
                       </td>
                       <td className="action-buttons">
                         <button className="delete-btn" onClick={() => handleDeleteUser(user.id)}>
-                          Usuń
+                          Delete
                         </button>
                       </td>
                     </tr>
@@ -207,11 +207,11 @@ const AdminPanel = () => {
           </div>
 
           <div className="section categories-section">
-            <h2>Zarządzanie Kategoriami</h2>
+            <h2>Manage categories</h2>
             <div className="add-category">
               <input 
                 type="text"
-                placeholder="Nazwa kategorii"
+                placeholder="Category name"
                 value={newCategoryName}
                 onChange={(e) => setNewCategoryName(e.target.value)}
                 className="category-input"
@@ -223,7 +223,7 @@ const AdminPanel = () => {
                 className="color-input"
               />
               <button onClick={handleAddCategory} className="add-btn">
-                Dodaj kategorię
+                Add category
               </button>
             </div>
             <div className="table-container">
@@ -231,9 +231,9 @@ const AdminPanel = () => {
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Nazwa</th>
-                    <th>Kolor</th>
-                    <th>Opcje</th>
+                    <th>Name</th>
+                    <th>Color</th>
+                    <th>Options</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -258,7 +258,7 @@ const AdminPanel = () => {
                       </td>
                       <td>
                         <button className="delete-btn" onClick={() => handleDeleteCategory(category.id)}>
-                          Usuń
+                          Delete
                         </button>
                       </td>
                     </tr>

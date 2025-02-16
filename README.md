@@ -26,9 +26,18 @@ A simple task management application designed to help users organize and manage 
 ## Screenshots
 
 ### Welcome Page
-![Welcome Page](./images/main.png)
+![Welcome Page](./images/home.png)
 
 ### Dashboard
 ![Dashboard](./images/dashboard.png)
+
+### Features Page
+![Dashboard](./images/features.png)
+
+### About page
+![Dashboard](./images/about.png)
+
+### Profile
+![Dashboard](./images/profile.png)
 
 ---

@@ -20,7 +20,6 @@ const Register = () => {
       body: JSON.stringify({ username, email, password }),
     });
     if (response.ok) {
-      alert('Signup successful, check your email for the verification code.');
       navigate('/verify'); // Przekierowanie do strony weryfikacji
     } else {
       alert('Signup failed');

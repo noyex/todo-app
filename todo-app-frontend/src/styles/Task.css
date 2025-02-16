@@ -5,7 +5,7 @@
   transition: all 0.2s ease;
   border: 1px solid transparent;
   position: relative;
-  margin-bottom: 1rem;
+  
 }
 
 .completed-at {
@@ -26,6 +26,21 @@
 .task.completed {
   background: rgba(52, 199, 89, 0.1);
   border-color: rgba(52, 199, 89, 0.2);
+}
+.task-status {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.task-category {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: white;
 }
 
 .task h3 {
@@ -53,6 +68,13 @@
   height: 8px;
   border-radius: 50%;
   margin-right: 0.5rem;
+}
+.task-priority {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .task .category-name {

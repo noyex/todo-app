@@ -1,13 +1,14 @@
 .dashboard-page {
-  padding: 4rem 2rem;
+  padding: 2rem;
   min-height: 100vh;
   background: #f5f5f7;
+  /* Usuwamy overflow: hidden aby strona mogła się scrollować */
 }
 
 .dashboard-page h1 {
   font-size: 2.5rem;
   color: #1d1d1f;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font-weight: 600;
 }
 
@@ -16,6 +17,7 @@
   gap: 2rem;
   max-width: 1400px;
   margin: 0 auto;
+  /* Usuwamy ustaloną wysokość, pozwalamy zawartości określać wysokość */
 }
 
 .task-list-container {
@@ -23,34 +25,58 @@
   background: white;
   border-radius: 16px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  /* Usuwamy height i overflow, pozwalamy zawartości określać wysokość */
+}
+
+.calendar-view {
+  padding: 1rem;
+  /* Usuwamy ustaloną wysokość */
+}
+
+.calendar-view .task-calendar-container {
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.calendar-view .fc {
+  background: white;
+  border-radius: 8px;
+  /* Usuwamy ustaloną wysokość */
 }
 
 .task-form-container {
   flex: 1;
   background: white;
   border-radius: 16px;
-  padding: 2rem;
+  padding: 1.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  height: fit-content;
+  height: 100%;
+  overflow: hidden;
 }
 
+.task-tabs {
+  padding: 1rem;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+/* Responsywność */
 @media (max-width: 1024px) {
   .dashboard-content {
     flex-direction: column;
-  }
-
-  .task-form-container {
-    order: -1;
   }
 }
 
 @media (max-width: 768px) {
   .dashboard-page {
-    padding: 2rem 1rem;
+    padding: 1rem 0.5rem;
   }
 
   .dashboard-page h1 {
     font-size: 2rem;
+    padding: 0 1rem;
   }
 }

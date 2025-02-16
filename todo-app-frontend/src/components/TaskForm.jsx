@@ -167,6 +167,7 @@ const TaskForm = ({ userId, categories, fetchTasks, editingTask, onUpdateTask })
             Cancel
           </button>
         )}
+        
       </div>
     </form>
   );

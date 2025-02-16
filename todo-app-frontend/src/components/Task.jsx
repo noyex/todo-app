@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaTrash, FaEdit, FaCheck } from 'react-icons/fa'; // Dodajemy import FaCheck
+import { FaTrash, FaEdit, FaCheck } from 'react-icons/fa'; 
 import '../styles/Task.css';
 
 const Task = ({ task, fetchTasks, onEditTask }) => {
@@ -38,10 +38,10 @@ const Task = ({ task, fetchTasks, onEditTask }) => {
 
   const getPriorityColor = (priority) => {
     const colors = {
-      'LOW': '#34C759',     // zielony
-      'MEDIUM': '#FFCC00',  // żółty
-      'HIGH': '#FF9500',    // pomarańczowy
-      'URGENT': '#FF3B30'   // czerwony
+      'LOW': '#34C759',     
+      'MEDIUM': '#FFCC00',  
+      'HIGH': '#FF9500',    
+      'URGENT': '#FF3B30'   
     };
     return colors[priority] || '#666';
   };
@@ -68,11 +68,6 @@ const Task = ({ task, fetchTasks, onEditTask }) => {
       <h3>{task.title}</h3>
       <p>{task.description}</p>
       <p>Due: {new Date(task.dueTo).toLocaleString()}</p>
-      <p>
-        Category: 
-        <span className="category-dot" style={{ backgroundColor: task.category.color }}></span>
-        {task.category.name}
-      </p>
       <div className="task-actions">
         <button 
           onClick={handleToggleDone}

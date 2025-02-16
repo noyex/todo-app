@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import TaskList from '../components/TaskList';
 import TaskForm from '../components/TaskForm';
 import TaskTabs from '../components/TaskTabs';
+import TaskCalendar from '../components/TaskCalendar';
 import '../styles/Dashboard.css';
 
 const Dashboard = () => {
@@ -49,17 +50,21 @@ const Dashboard = () => {
 
   const fetchTasks = async (userId, token) => {
     let endpoint;
-    switch (activeTab) {
-      case 'done':
-        endpoint = `http://localhost:8080/api/todos/all/done/${userId}`;
-        break;
-      case 'not-done':
-        endpoint = `http://localhost:8080/api/todos/all/not-done/${userId}`;
-        break;
-      default:
-        endpoint = `http://localhost:8080/api/todos/all/${userId}`;
+    if (activeTab === 'calendar') {
+      endpoint = `http://localhost:8080/api/todos/all/${userId}`; // Zawsze pobieraj wszystkie zadania dla kalendarza
+    } else {
+      switch (activeTab) {
+        case 'done':
+          endpoint = `http://localhost:8080/api/todos/all/done/${userId}`;
+          break;
+        case 'not-done':
+          endpoint = `http://localhost:8080/api/todos/all/not-done/${userId}`;
+          break;
+        default:
+          endpoint = `http://localhost:8080/api/todos/all/${userId}`;
+      }
     }
-
+  
     const response = await fetch(endpoint, {
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -126,11 +131,17 @@ const Dashboard = () => {
         <div className="dashboard-content">
           <div className="task-list-container">
             <TaskTabs activeTab={activeTab} onTabChange={setActiveTab} />
-            <TaskList 
-              tasks={tasks} 
-              fetchTasks={() => fetchTasks(user.id, localStorage.getItem('token'))} 
-              onEditTask={handleEditTask} 
-            />
+            {activeTab === 'calendar' ? (
+              <div className="calendar-view">
+                <TaskCalendar tasks={tasks} categories={categories} />
+              </div>
+            ) : (
+              <TaskList 
+                tasks={tasks} 
+                fetchTasks={() => fetchTasks(user.id, localStorage.getItem('token'))} 
+                onEditTask={handleEditTask} 
+              />
+            )}
           </div>
           <div className="task-form-container">
             <TaskForm

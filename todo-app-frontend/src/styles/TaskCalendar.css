@@ -1,0 +1,226 @@
+.task-calendar-container {
+  padding: 1rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Stylowanie wydarzeń w kalendarzu */
+.calendar-event {
+  border: none !important;
+  padding: 4px 8px !important;
+  margin: 1px 0 !important;
+  border-radius: 6px !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+  position: relative !important;
+  overflow: hidden !important;
+  color: white !important;
+}
+
+.calendar-event::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.event-hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.event-hover::before {
+  transform: translateX(0) !important;
+}
+
+/* Popover styles */
+.task-popover {
+  position: fixed;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  min-width: 280px;
+  max-width: 320px;
+  z-index: 1000;
+  animation: popoverFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.task-popover-content {
+  padding: 16px;
+  background: white;
+  border-radius: 12px;
+  position: relative;
+}
+
+.task-popover-content::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 20px;
+  width: 12px;
+  height: 12px;
+  background: white;
+  transform: rotate(45deg);
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.task-popover-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.task-popover-title {
+  font-weight: 600;
+  font-size: 1.1em;
+  color: #202124;
+  margin-right: 12px;
+}
+
+.priority-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 500;
+  background: #f1f3f4;
+  color: #5f6368;
+  text-transform: lowercase;
+}
+
+.task-popover-metadata {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.task-popover-category {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #5f6368;
+  font-size: 0.9em;
+}
+
+.category-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.task-popover-time {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #5f6368;
+  font-size: 0.9em;
+}
+
+.task-popover-description {
+  padding-top: 12px;
+  margin-top: 12px;
+  border-top: 1px solid #e8eaed;
+  color: #202124;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+/* Animacje */
+@keyframes popoverFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Style dla kalendarza */
+.fc {
+  font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.fc .fc-button-primary {
+  background: #1a73e8;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+}
+
+.fc .fc-button-primary:hover {
+  background: #1557b0;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.2);
+}
+
+.fc-theme-standard td {
+  border-color: #e8eaed;
+}
+
+.fc-theme-standard th {
+  background: #f8f9fa;
+  border-color: #e8eaed;
+  padding: 12px 0;
+}
+
+.fc-day-today {
+  background: #e8f0fe !important;
+}
+
+.fc-day-today .fc-daygrid-day-number {
+  background: #1a73e8;
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4px;
+}
+
+/* More link styles */
+.fc-more-link {
+  background: #f1f3f4;
+  color: #1a73e8;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 0.85em;
+  transition: all 0.2s ease;
+}
+
+.fc-more-link:hover {
+  background: #e8f0fe;
+  color: #1557b0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .task-popover {
+    position: fixed;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: none;
+  }
+}

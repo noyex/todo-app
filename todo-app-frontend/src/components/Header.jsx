@@ -6,7 +6,6 @@ const Header = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
 
-  // Assuming the role is stored in localStorage after login
   const role = localStorage.getItem('role'); 
 
   const handleDashboardClick = () => {
@@ -34,7 +33,7 @@ const Header = () => {
   return (
     <header className="app-header">
       <div className="header-container">
-        <h1>Todo App</h1>
+        <Link to="/" className="app-title">Todo App</Link>
         <nav className="header-nav">
           <ul>
             {token ? (

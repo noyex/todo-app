@@ -10,6 +10,8 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import './App.css';
 import AdminPanel from './components/AdminPanel';
+import Features from './components/Features';
+import About from './components/About';
 
 function App() {
   return (
@@ -24,7 +26,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin" element={<AdminPanel />} />
-
+          <Route path="/features" element={<Features />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </main>
       <Footer />

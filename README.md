@@ -40,4 +40,7 @@ A simple task management application designed to help users organize and manage 
 ### Profile
 ![Dashboard](./images/profile.png)
 
+### Calendar with popup
+![Dashboard](./images/calendar-popup.png)
+
 ---

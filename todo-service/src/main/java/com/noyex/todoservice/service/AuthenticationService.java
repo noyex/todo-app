@@ -168,22 +168,33 @@ public class AuthenticationService implements IAuthenticationService {
                 "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
                 "</head>" +
                 "<body style=\"margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\">" +
-                "<div style=\"background-color: #F2F2F7; padding: 40px 20px;\">" +
-                "<table cellpadding=\"0\" cellspacing=\"0\" style=\"max-width: 400px; width: 100%; margin: 0 auto; background-color: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08);\">" +
+                "<div style=\"background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%); padding: 40px 20px;\">" +
+                "<table cellpadding=\"0\" cellspacing=\"0\" style=\"max-width: 500px; width: 100%; margin: 0 auto; background-color: white; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1);\">" +
                 "<tr>" +
-                "<td style=\"padding: 40px 32px 32px 32px; text-align: center;\">" +
-                "<h1 style=\"color: #1c1c1e; font-size: 24px; margin: 0 0 16px 0; font-weight: 600;\">Verify Your Email</h1>" +
-                "<p style=\"color: #8e8e93; font-size: 15px; line-height: 1.4; margin: 0 0 32px 0;\">Enter this verification code to continue</p>" +
+                "<td style=\"padding: 0;\">" +
+                "<div style=\"background: linear-gradient(135deg, #007AFF 0%, #00C7BE 100%); padding: 40px 32px; text-align: center;\">" +
+                "<h1 style=\"color: white; font-size: 28px; margin: 0 0 16px 0; font-weight: 600;\">Verify Your Email</h1>" +
+                "<p style=\"color: rgba(255,255,255,0.9); font-size: 16px; line-height: 1.5; margin: 0;\">Enter this verification code to continue</p>" +
+                "</div>" +
                 "</td>" +
                 "</tr>" +
                 "<tr>" +
-                "<td style=\"padding: 0 32px 40px 32px;\">" +
-                "<div style=\"background-color: #F2F2F7; border-radius: 16px; padding: 24px; text-align: center;\">" +
-                "<div style=\"font-family: -apple-system, BlinkMacSystemFont, monospace; letter-spacing: 8px; font-size: 32px; font-weight: 600; color: #007AFF;\">" +
+                "<td style=\"padding: 40px 32px;\">" +
+                "<div style=\"background: rgba(0,122,255,0.05); border-radius: 20px; padding: 32px; text-align: center; border: 1px solid rgba(0,122,255,0.1);\">" +
+                "<div style=\"font-family: -apple-system, BlinkMacSystemFont, monospace; letter-spacing: 12px; font-size: 36px; font-weight: 600; color: #007AFF; text-shadow: 0 2px 4px rgba(0,122,255,0.1);\">" +
                 verificationCode +
                 "</div>" +
-                "<p style=\"color: #8e8e93; font-size: 13px; margin: 16px 0 0 0;\">Code expires in 10 minutes</p>" +
+                "<p style=\"color: #666; font-size: 14px; margin: 20px 0 0 0; display: flex; align-items: center; justify-content: center;\">" +
+                "<span style=\"display: inline-block; width: 16px; height: 16px; margin-right: 8px; background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzY2NiI+PHBhdGggZD0iTTEyIDJDNi41IDIgMiA2LjUgMiAxMnM0LjUgMTAgMTAgMTAgMTAtNC41IDEwLTEwUzE3LjUgMiAxMiAyek0xMiA1YzMuOSAwIDcgMy4xIDcgN3MtMy4xIDctNyA3LTctMy4xLTctNyAzLjEtNyA3LTd6bTAgMmMtMi44IDAtNSAyLjItNSA1czIuMiA1IDUgNSA1LTIuMiA1LTUtMi4yLTUtNS01eiIvPjwvc3ZnPg==') center/contain no-repeat;\"></span>" +
+                "Code expires in 10 minutes</p>" +
                 "</div>" +
+                "</td>" +
+                "</tr>" +
+                "<tr>" +
+                "<td style=\"padding: 0 32px 40px 32px; text-align: center;\">" +
+                "<p style=\"color: #8e8e93; font-size: 14px; line-height: 1.5; margin: 0;\">" +
+                "If you didn't request this verification code, you can safely ignore this email." +
+                "</p>" +
                 "</td>" +
                 "</tr>" +
                 "</table>" +

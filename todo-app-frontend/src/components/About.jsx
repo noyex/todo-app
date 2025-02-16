@@ -12,7 +12,7 @@ const About = () => {
             <span className="avatar-text">M</span>
           </div>
           <h1>About Me</h1>
-          <p className="subtitle">Student & Developer from Poland</p>
+          <p className="subtitle">Mikołaj - Student & Developer from Poland</p>
           <div className="social-links">
             <a 
               href="https://github.com/noyex" 
@@ -106,7 +106,7 @@ const About = () => {
                 <div className="journey-icon">🚀</div>
                 <div className="journey-text">
                   <h4>Future Goals</h4>
-                  <p>Becoming a proficient full-stack developer</p>
+                  <p>Becoming a proficient Java developer</p>
                 </div>
               </div>
             </div>

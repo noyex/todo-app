@@ -136,7 +136,7 @@ const Profile = () => {
       <div className="dashboard-content">
         {user ? (
           <div className="profile-container">
-            <div className="profile-section">
+            <div className="profile-section-user">
               <h2>User Details</h2>
               
               <div className="profile-field-group">

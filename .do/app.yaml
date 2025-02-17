@@ -2,12 +2,13 @@ name: todo-app
 region: fra
 services:
   - name: backend
-    source_dir: .
+    source_dir: todo-api
     github:
       branch: main
       repo: noyex/todo-app
+    environment_slug: java
     build_command: mvn clean package -DskipTests
-    run_command: java -jar todo-api/target/*.jar
+    run_command: java -jar target/todo-api.jar
     instance_size_slug: basic-xs
     instance_count: 1
     routes:
@@ -32,8 +33,8 @@ services:
     github:
       branch: main
       repo: noyex/todo-app
-    build_command: npm install && npm run build
     environment_slug: node-js
+    build_command: npm install && npm run build
     run_command: npm start
     instance_size_slug: basic-xs
     routes:

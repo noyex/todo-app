@@ -33,8 +33,9 @@ services:
       branch: main
       repo: noyex/todo-app
     build_command: npm install && npm run build
-    environment_slug: static
-    output_dir: build
+    environment_slug: node-js
+    run_command: npm start
+    instance_size_slug: basic-xs
     routes:
       - path: /
     envs:
@@ -43,7 +44,7 @@ services:
         value: ${APP_URL}/api
 
 databases:
-  - engine: mysql # DigitalOcean używa MySQL, ale jest kompatybilny z MariaDB
+  - engine: mysql
     name: todo-db
     version: "8"
     production: false

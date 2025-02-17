@@ -2,13 +2,13 @@ name: todo-app
 region: fra
 services:
   - name: backend
-    source_dir: todo-api
+    source_dir: .
     github:
       branch: main
       repo: noyex/todo-app
     environment_slug: java
-    build_command: mvn clean package -DskipTests
-    run_command: java -Dserver.port=$PORT -jar target/todo-api.jar
+    build_command: mvn clean install -DskipTests && cd todo-api && mvn package -DskipTests
+    run_command: java -Dserver.port=$PORT -jar todo-api/target/todo-api.jar
     instance_size_slug: basic-xs
     instance_count: 1
     routes:

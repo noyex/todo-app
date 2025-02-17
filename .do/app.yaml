@@ -1,0 +1,50 @@
+name: todo-app
+region: fra
+services:
+  - name: backend
+    source_dir: .
+    github:
+      branch: main
+      repo: noyex/todo-app
+    build_command: mvn clean package -DskipTests
+    run_command: java -jar todo-api/target/*.jar
+    instance_size_slug: basic-xs
+    instance_count: 1
+    routes:
+      - path: /api
+    envs:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: SPRING_DATASOURCE_URL
+        scope: RUN_TIME
+        value: ${todo-db.DATABASE_URL}
+      - key: SPRING_DATASOURCE_USERNAME
+        scope: RUN_TIME
+        value: ${todo-db.USERNAME}
+      - key: SPRING_DATASOURCE_PASSWORD
+        scope: RUN_TIME
+        value: ${todo-db.PASSWORD}
+      - key: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+        value: org.mariadb.jdbc.Driver
+
+  - name: frontend
+    source_dir: todo-app-frontend
+    github:
+      branch: main
+      repo: noyex/todo-app
+    build_command: npm install && npm run build
+    environment_slug: static
+    output_dir: build
+    routes:
+      - path: /
+    envs:
+      - key: REACT_APP_API_URL
+        scope: BUILD_TIME
+        value: ${APP_URL}/api
+
+databases:
+  - engine: mysql # DigitalOcean używa MySQL, ale jest kompatybilny z MariaDB
+    name: todo-db
+    version: "8"
+    production: false
+    cluster_size: db-s-dev-database

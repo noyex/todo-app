@@ -17,6 +17,7 @@ A simple task management application designed to help users organize and manage 
 - Secure user authentication system:
   - User registration and login using **JWT (JSON Web Tokens)**.
   - Bearer token-based authentication for API security.
+  - Account activation by code from user email.
 - RESTful API endpoints for task management:
   - Create, update, delete, and retrieve tasks.
 
